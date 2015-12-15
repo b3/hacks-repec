@@ -11,8 +11,7 @@
 #     -h, --help  affiche ce message
 
 usage () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
-test "x$1" = "x-h" && usage && exit
-test "x$1" = "x--help" && usage && exit
+[ "x$1" = "x-h" -o "x$1" = "x--help" ] && usage && exit
 
 set -e
 umask 0002
