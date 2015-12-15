@@ -5,7 +5,7 @@
 #
 # L'archive est copiée dans DEST/remo/all.
 #
-# Par défaut DEST=/srv/src/repec/RePEc.
+# Par défaut DEST=/home/repec/RePEc.
 # 
 # OPTIONS possibles :
 #     -h, --help  affiche ce message
@@ -17,7 +17,7 @@ test "x$1" = "x--help" && usage && exit
 set -e
 umask 0002
 
-DEST="${1:-/srv/src/repec/RePEc}"
+DEST="${1:-/home/repec/RePEc}"
 
 cd "$DEST/remo" && mkdir -p all && cd all &&
 wget -r -l inf -nH --cut-dirs=2 -nc "ftp://all.repec.org/RePEc/all"
