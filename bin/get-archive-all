@@ -20,6 +20,7 @@ umask 0002
 DEST="${1:-/home/repec/RePEc}"
 
 cd "$DEST/remo" && mkdir -p all ../log && cd all &&
-{
-    wget -r -l inf -nH --cut-dirs=2 -nc "ftp://all.repec.org/RePEc/all" | tee -a $DEST/log
-}
+(
+    exec 2>&1 ; set -x
+    wget -r -l inf -nH --cut-dirs=2 -nc "ftp://all.repec.org/RePEc/all"
+) | tee -a $DEST/log/$(basename $0).log
