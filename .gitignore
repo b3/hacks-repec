@@ -5,10 +5,12 @@ RePEc/
 .bashrc
 .emacs
 .emacs.d
+.gitconfig
 .inputrc
+.lesshst
 .profile
 .screenrc
 .skel-version
 .ssh
+.viminfo
 .vimrc
-.gitconfig
