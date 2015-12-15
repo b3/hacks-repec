@@ -1,1 +1,13 @@
 RePEc/
+.bash_eternal_history
+.bash_history
+.bash_logout
+.bashrc
+.emacs
+.emacs.d
+.inputrc
+.profile
+.screenrc
+.skel-version
+.ssh
+.vimrc
