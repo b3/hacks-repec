@@ -1,8 +1,13 @@
-makefile := $(lastword $(MAKEFILE_LIST))
-
 all:
-	@echo "Choisir une cible"
-	@egrep -B1 '^[^.: ]+:' $(makefile) | grep -ve '--' | sed -e 1,2d -e 's/:.*$$//'
+	@echo "Tâches disponibles"
+	@egrep -hB1 '^[^.: ]+:' $(MAKEFILE_LIST) | sed '1d;s/--//;s/:.*$$//;s/^/  /'
+
+sinclude makefile.$(shell uname -n)
+
+.PHONY: check
+# vérifier la présence des outils nécessaires
+check:
+	bin/check-tools
 
 .PHONY: push
 # pousser les modifications vers les dépôts git
