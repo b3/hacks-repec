@@ -1,0 +1,21 @@
+#!/bin/sh
+# Vérifie que tous les outils nécessaires sont disponibles.
+# 
+# usage: check-tools [OPTIONS]
+# 
+# OPTIONS possibles :
+#     -h, --help  affiche ce message
+#     -l          liste les outils nécessaires
+
+usage () { sed -n '2,/^$/ {s/^ *# //g ; p ; }' <$0 ; }
+missing () { echo "$1 is unavailable" ; exit 1 ; }
+
+test "x$1" = "x-h" && usage && exit
+test "x$1" = "x--help" && usage && exit
+test "$1" = "-l" && egrep '\|\| missing' $0 | sed -r 's/^.* (.*)$/\1/' && exit
+
+# Pour le lancement des tâches
+which make 1>/dev/null 2>&1 || missing make
+
+# Pour la récupération des archives
+which wget 1>/dev/null 2>&1 || missing wget
