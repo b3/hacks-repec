@@ -3,7 +3,7 @@
 # 
 # usage: get-archives [OPTIONS] [DEST]
 #
-# Les archives sont copiées dans DEST/remo en loguant les téléchargement dans
+# Les archives sont copiées dans DEST/remo en loguant les téléchargements dans
 # DEST/log/get-archives.log. Les archives récupérées sont celles aux codes de
 # 3 lettres, définies dans DEST/remo/all.
 #
