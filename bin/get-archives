@@ -43,7 +43,7 @@ mkdir -p ../log
                 ndirs=${#ndirs}
                 mkdir -p $arc
                 cd $arc
-                wget -nv -m -nH --cut-dirs=$ndirs "$url"
+                wget -np -A "*.rdf" -nv -m -nH --cut-dirs=$ndirs "$url"
             )
         done
     }
