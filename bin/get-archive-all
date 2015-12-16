@@ -3,7 +3,8 @@
 # 
 # usage: get-archive-all [OPTIONS] [DEST]
 #
-# L'archive est copiée dans DEST/remo/all.
+# L'archive est copiée dans DEST/remo/all en loguant le téléchargement dans
+# DEST/log/get-archive-all.log.
 #
 # Par défaut DEST=/home/repec/RePEc.
 # 
@@ -18,8 +19,10 @@ umask 0002
 
 DEST="${1:-/home/repec/RePEc}"
 
-cd "$DEST/remo" && mkdir -p all ../log && cd all &&
+cd "$DEST/remo"
+mkdir -p all ../log
+cd all
 (
     exec 2>&1 ; set -x
-    wget -r -l inf -nH --cut-dirs=2 -nc "ftp://all.repec.org/RePEc/all"
+    wget -nv -m -nH --cut-dirs=2 "ftp://all.repec.org/RePEc/all"
 ) | tee -a $DEST/log/$(basename $0).log
