@@ -1,0 +1,142 @@
+#!/bin/bash
+# Crée une trace d'exécution d'une copie de la base RePEc en local.
+# 
+# usage: repec-trace [OPTIONS]
+#
+# La trace est construite à partir des répertoires présents dans RDIR/remo et
+# des fichiers présents dans RDIR/log. La trace est affichée sur la sortie
+# standard.
+#
+# RDIR est le répertoire contenant la base des données de RePEc. La valeur par
+# défaut pour RDIR est le contenu de la variable d'environnement REPEC_HOME si
+# elle existe ou /home/repec/RePEc sinon.
+#
+# OPTIONS possibles :
+#     -h, --help          affiche ce message
+#     -d, --dest DIR      fixe l'emplacement de la base RePEc
+#     -w, --webpage       génère une page HTML plutôt que du texte
+
+DEST=${REPEC_HOME:-/home/repec/RePEc}
+HTML=false
+
+doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
+
+out ()
+{
+    $HTML || printf "$1\n\n"
+    $HTML && printf "    <h2>$1</h2>\n<pre>\n"
+    shift 
+    eval $*
+    $HTML || printf "\n\n"
+    $HTML && printf "</pre>\n\n"
+}
+
+while [ ! -z "$1" ] ;
+do
+    case "$1" in
+        "-h"|"--help") doc && exit ;;
+        "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
+        "-w"|"--webpage") HTML=true ;;
+        *) break;
+    esac
+    shift
+done
+
+$HTML && {
+    titre="Trace RePEc du $(date '+%F à %T')"
+    nom="$(git config --get user.name)"
+    email="$(git config --get user.name)"
+    
+    cat <<EOF
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='fr' lang='fr'>
+  <head>
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
+    <meta name='author' content='$nom ($email)'/>
+    <style type='text/css'>
+$(sed -n '\!^# CSS!,$ { s/^/    / ; p }' $0 | sed 1d)
+    </style>
+    <title>$titre</title>
+  </head>
+
+  <body>
+    <h1>$titre</h1>
+
+    <p>Les archives téléchargées sont accessibles dans <code><a href='remo'>remo</a></code>.</p>
+
+EOF
+}
+
+cd $DEST
+
+out "10 dernières archives modifiées" "ls -tl remo | head | sed 1d"
+
+out "10 dernières actions" tail -10 log/repec.log
+
+out "Taille disque utilisée" du -shc *
+
+out "Derniers téléchargements" 'tail -10 $(ls -1t $DEST/log/???.log | head -1)'
+
+$HTML && cat <<EOF
+  </body>
+</html>
+EOF
+
+exit 0
+
+##############################################################################
+
+# CSS
+body{
+  font-family: helvetica, arial, freesans, clean, sans-serif;
+  color: #333;
+  background-color: #fff;
+  border: none;
+  line-height: 1.5;
+  margin: 2em 3em;
+  text-align:left;
+}
+pre{
+  background-color: #eee;
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  overflow: auto;
+}
+code{
+  background-color: #eee;
+  padding: 1px 3px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;   
+}
+li p{
+  margin: 0.3em;
+}
+li{
+  list-style-type: disc;
+}
+a:link, a:visited{
+  color: #33e;
+  text-decoration: none;
+}
+a:hover{
+  color: #00f;
+  text-shadow:1px 1px 2px #ccf;
+  text-decoration:underline;
+}
+h1{
+  color: #999;
+  font-weight: bold;
+  }
+h2{
+  border-bottom: 1px dotted #aaa;
+  margin-bottom: 1em;
+  color: #333;
+}
+h3{
+  color: #666;
+}
