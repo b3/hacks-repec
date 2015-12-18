@@ -53,7 +53,7 @@ umask 0002
 ARC="$1"
 
 cd "$DEST/remo"
-mkdir "$DEST/log"
+mkdir -p "$DEST/log"
 
 {
     if [ "$ARC" = all ] ; then
