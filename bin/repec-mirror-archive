@@ -70,7 +70,7 @@ mkdir -p "$DEST/log"
 {
     read arc url
 
-    $INIT_ONLY && test -d $arc && exit 
+    $INIT_ONLY && test -d $arc && log $arc $url skipped && exit
     
     log $arc $url begin 
     trap "set +x ; log $arc $url stop ; trap - ERR" exit
