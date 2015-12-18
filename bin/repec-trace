@@ -73,20 +73,19 @@ $(sed -n '\!^# <CSS>!,\!^# </CSS>! { s/^/      / ; p }' $0 | sed '1d ; $d')
 EOF
 }
 
-shopt -s nullglob
-
 cd "$DEST"
 
-[ -e log/repec.log ] && out "Dernières actions" \
+out "Dernières actions" \
     "tail -n 5 log/repec.log"
 
 out "Dernières archives modifiées" \
     "ls -tl remo | head -n 6 | sed 1d"
 
-[ -e log/repec.log ] && out "Dernières archives en erreur" \
+out "Dernières archives en erreur" \
     "grep 'error$' log/repec.log | tail -n 20 | cut -d ' ' -f 4 | tr '\n' ' ' | sed 's/$/\n/'"
 
-[ -z "log/???.log" ] || out "Derniers téléchargements" \
+shopt -s nullglob
+out "Derniers téléchargements" \
     "tail -n 5 $(ls -1t log/???.log | head -n 2)"
 
 out "Taille disque utilisée" \
