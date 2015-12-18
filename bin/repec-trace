@@ -45,7 +45,7 @@ done
 $HTML && {
     titre="Trace RePEc du $(date '+%F à %T')"
     nom="$(git config --get user.name)"
-    email="$(git config --get user.name)"
+    email="$(git config --get user.email)"
     
     cat <<EOF
 <!DOCTYPE html>
@@ -54,10 +54,10 @@ $HTML && {
     <meta charset="UTF-8"/>
     <meta name="author" content="$nom ($email)"/>
     <style type="text/css">
-$(sed -n '\!^# <CSS>!,\!^# </CSS>! { s/^/    / ; p }' $0 | sed '1d ; $d')
+$(sed -n '\!^# <CSS>!,\!^# </CSS>! { s/^/      / ; p }' $0 | sed '1d ; $d')
     </style>
     <script>
-    window.setTimeout(function(){ location.reload() }, 10000);
+      window.setTimeout(function(){ location.reload() }, 10000);
     </script>
     <title>$titre</title>
   </head>
@@ -77,23 +77,22 @@ shopt -s nullglob
 
 cd "$DEST"
 
-out "Dernières actions" \
-    "[ -e log/repec.log ] && tail log/repec.log"
+[ -e log/repec.log ] && out "Dernières actions" \
+    "tail -n 5 log/repec.log"
 
 out "Dernières archives modifiées" \
     "ls -tl remo | head -n 6 | sed 1d"
 
-out "Dernières archives en erreur" \
-    "[ -e log/repec.log ] && grep error log/repec.log | cut -d ' ' -f 4 | sort | uniq| tr '\n' ' '"
+[ -e log/repec.log ] && out "Dernières archives en erreur" \
+    "grep 'error$' log/repec.log | tail -n 20 | cut -d ' ' -f 4 | sort | uniq | tr '\n' ' '"
+
+[ -z "log/???.log" ] || out "Derniers téléchargements" \
+    "tail -n 5 $(ls -1t log/???.log | head -n 2)"
 
 out "Taille disque utilisée" \
     "du -shc *"
 
-out "Derniers téléchargements" \
-    "[ -z log/???.log ] || tail -n 5 $(ls -1t log/???.log | head -n 2)"
-
 $HTML && cat <<EOF
-
   </body>
 </html>
 EOF
