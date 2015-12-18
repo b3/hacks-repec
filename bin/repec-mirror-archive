@@ -84,13 +84,11 @@ mkdir -p "$DEST/log"
 
     [ $arc = all ] && WHAT=
 
-    set -x
     wget $WHAT \
          -t 2 --read-timeout=90 \
          -m \
          -np -nH --cut-dirs=$ndirs \
-         -nv -o "$DEST/log/$ARC.log" "$url"
-    set +x
+         -o "$DEST/log/$ARC.log" "$url"
 
     log $arc $url end
 } 
