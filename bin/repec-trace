@@ -48,40 +48,52 @@ $HTML && {
     email="$(git config --get user.name)"
     
     cat <<EOF
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-
-<html xmlns='http://www.w3.org/1999/xhtml' xml:lang='fr' lang='fr'>
+<!DOCTYPE html>
+<html lang="fr">
   <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8'/>
-    <meta name='author' content='$nom ($email)'/>
-    <style type='text/css'>
-$(sed -n '\!^# CSS!,$ { s/^/    / ; p }' $0 | sed 1d)
+    <meta charset="UTF-8"/>
+    <meta name="author" content="$nom ($email)"/>
+    <style type="text/css">
+$(sed -n '\!^# <CSS>!,\!^# </CSS>! { s/^/    / ; p }' $0 | sed '1d ; $d')
     </style>
+    <script>
+    window.setTimeout(function(){ location.reload() }, 10000);
+    </script>
     <title>$titre</title>
   </head>
 
   <body>
     <h1>$titre</h1>
 
-    <p>Les archives téléchargées sont accessibles dans <code><a href='remo'>remo</a></code>.</p>
+    <p>
+      Les archives téléchargées sont accessibles dans <code><a href='remo'>remo</a></code>.
+      La page se recharge automatiquement toutes les 10 secondes.
+    </p>
 
 EOF
 }
 
+shopt -s nullglob
+
 cd "$DEST"
 
-out "Dernières archives modifiées" "ls -tl remo | head -n 6 | sed 1d"
+out "Dernières actions" \
+    "[ -e log/repec.log ] && tail log/repec.log"
 
-out "Dernières actions" tail log/repec.log
+out "Dernières archives modifiées" \
+    "ls -tl remo | head -n 6 | sed 1d"
 
-out "Taille disque utilisée" du -shc *
+out "Dernières archives en erreur" \
+    "[ -e log/repec.log ] && grep error log/repec.log | cut -d ' ' -f 4 | sort | uniq| tr '\n' ' '"
 
-out "Dernières archives en erreur" "grep error log/repec.log | cut -d ' ' -f 4 | sort | uniq| tr '\n' ' '"
+out "Taille disque utilisée" \
+    "du -shc *"
 
-out "Derniers téléchargements" 'tail -n 5 $(ls -1t log/???.log | head -n 2)'
+out "Derniers téléchargements" \
+    "[ -z log/???.log ] || tail -n 5 $(ls -1t log/???.log | head -n 2)"
 
 $HTML && cat <<EOF
+
   </body>
 </html>
 EOF
@@ -90,7 +102,7 @@ exit 0
 
 ##############################################################################
 
-# CSS
+# <CSS>
 body{
   font-family: helvetica, arial, freesans, clean, sans-serif;
   color: #333;
@@ -142,3 +154,4 @@ h2{
 h3{
   color: #666;
 }
+# </CSS>
