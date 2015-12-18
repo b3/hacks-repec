@@ -24,6 +24,7 @@
 #     -h, --help  affiche ce message
 #     -d, --dest DIR      fixe l'emplacement de la base RePEc
 #     -a, --all-url URL   fixe l'URL pour l'archive all
+#     -i, --init          copie uniquement les archives pas encore copiées
 #     -f, --full          copie tout, aka pas uniquement les fichiers RDF
 
 DEST=${REPEC_HOME:-/home/repec/RePEc}
@@ -42,6 +43,8 @@ do
     esac
     shift
 done
+
+set -e
 
 mkdir -p "$DEST/log"
 

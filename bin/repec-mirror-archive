@@ -21,11 +21,13 @@
 #     -h, --help          affiche ce message
 #     -d, --dest DIR      fixe l'emplacement de la base RePEc
 #     -a, --all-url URL   fixe l'URL pour l'archive all
+#     -i, --init          copie l'archive uniquement si elle ne l'est pas déjà
 #     -f, --full          copie tout, aka pas uniquement les fichiers RDF
 
 DEST=${REPEC_HOME:-/home/repec/RePEc}
 ALL=${REPEC_ALL_URL:-ftp://all.repec.org/RePEc/all}
 WHAT="-A \*.rdf"
+INIT_ONLY=false
 
 doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
 log () { date "+%F %T $(basename $0) $*" | \
@@ -38,6 +40,7 @@ do
         "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
         "-a"|"--all-url") shift ; ALL="$1" ;;
         "-f"|"--full") WHAT= ;;
+        "-i"|"--init") INIT_ONLY=true ;;
         *) break;
     esac
     shift
@@ -66,6 +69,8 @@ mkdir -p "$DEST/log"
 } |
 {
     read arc url
+
+    $INIT_ONLY && test -d $arc && exit 
     
     log $arc $url begin 
     trap "set +x ; log $arc $url stop ; trap - ERR" exit
