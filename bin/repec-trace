@@ -71,13 +71,15 @@ EOF
 
 cd "$DEST"
 
-out "10 dernières archives modifiées" "ls -tl remo | head | sed 1d"
+out "Dernières archives modifiées" "ls -tl remo | head -n 6 | sed 1d"
 
-out "10 dernières actions" tail -10 log/repec.log
+out "Dernières actions" tail log/repec.log
 
 out "Taille disque utilisée" du -shc *
 
-out "Derniers téléchargements" 'tail -10 $(ls -1t log/???.log | head -1)'
+out "Dernières archives en erreur" "grep error log/repec.log | cut -d ' ' -f 4 | sort | uniq| tr '\n' ' '"
+
+out "Derniers téléchargements" 'tail -n 5 $(ls -1t log/???.log | head -n 2)'
 
 $HTML && cat <<EOF
   </body>
