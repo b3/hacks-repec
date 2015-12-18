@@ -1,0 +1,53 @@
+#!/bin/bash
+# Récupère toutes les archives de RePEc en local.
+# 
+# usage: repec-mirror [OPTIONS]
+#
+# Les archives sont copiées dans RDIR/remo. Seul les fichiers RDF sont
+# téléchargés (sauf pour l'archive all qui est copiée intégralement). Les
+# archives récupérées sont celles aux codes de 3 lettres, définies dans
+# l'archive all.
+#
+# Le début et la fin du travail sont logués dans RDIR/log/repec.log, le
+# téléchargement de chaque archive dans RDIR/log/ARC.log (ARC étant le code de
+# chaque archive).
+#
+# RDIR est le répertoire contenant la base des données de RePEc. La valeur par
+# défaut pour RDIR est le contenu de la variable d'environnement REPEC_HOME si
+# elle existe ou /home/repec/RePEc sinon.
+#
+# L'archive all est téléchargée, si nécessaire, depuis l'URL définie par la
+# valeur de la variable d'environnement REPEC_ALL_URL si elle existe ou
+# ftp://all.repec.org/RePEc/all sinon.
+# 
+# OPTIONS possibles :
+#     -h, --help  affiche ce message
+#     -d, --dest DIR      fixe l'emplacement de la base RePEc
+#     -a, --all-url URL   fixe l'URL pour l'archive all
+#     -f, --full          copie tout, aka pas uniquement les fichiers RDF
+
+DEST=${REPEC_HOME:-/home/repec/RePEc}
+ALL=${REPEC_ALL_URL:-ftp://all.repec.org/RePEc/all}
+PATH="$(cd $(dirname $0) ; pwd):$PATH"
+
+doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
+log () { date "+%F %T $(basename $0) $*" | tee -a "$DEST/log/repec.log" ; }
+
+ARGS="$@"
+while [ ! -z "$1" ] ;
+do
+    case "$1" in
+        "-h"|"--help") doc && exit ;;
+        "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
+    esac
+    shift
+done
+
+mkdir -p "$DEST/log"
+
+[ ! -d "$DEST/remo/all" ] && repec-mirror-archive $ARGS all
+
+for arc in $(cd "$DEST/remo/all" ; ls -1 ???arch.rdf | cut -c1-3)
+do
+    repec-mirror-archive $ARGS $arc
+done

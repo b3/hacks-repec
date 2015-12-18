@@ -1,0 +1,91 @@
+#!/bin/bash
+# Récupère une archive de RePEc en local.
+# 
+# usage: repec-mirror-archive [OPTIONS] ARC
+#
+# L'archive est copiée dans RDIR/remo/ARC. Seul les fichiers RDF sont
+# téléchargés.
+#
+# Le début et la fin du travail sont logués dans RDIR/log/repec.log, le
+# téléchargement dans RDIR/log/ARC.log.
+#
+# RDIR est le répertoire contenant la base des données de RePEc. La valeur par
+# défaut pour RDIR est le contenu de la variable d'environnement REPEC_HOME si
+# elle existe ou /home/repec/RePEc sinon.
+#
+# L'archive all est téléchargée depuis l'URL définie par la valeur de la
+# variable d'environnement REPEC_ALL_URL si elle existe ou
+# ftp://all.repec.org/RePEc/all sinon.
+#
+# OPTIONS possibles :
+#     -h, --help          affiche ce message
+#     -d, --dest DIR      fixe l'emplacement de la base RePEc
+#     -a, --all-url URL   fixe l'URL pour l'archive all
+#     -f, --full          copie tout, aka pas uniquement les fichiers RDF
+
+DEST=${REPEC_HOME:-/home/repec/RePEc}
+ALL=${REPEC_ALL_URL:-ftp://all.repec.org/RePEc/all}
+WHAT="-A \*.rdf"
+
+doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
+log () { date "+%F %T $(basename $0) $*" | \
+               tee -a "$DEST/log/repec.log" "$DEST/log/$ARC.log" ; }
+
+while [ ! -z "$1" ] ;
+do
+    case "$1" in
+        "-h"|"--help") doc && exit ;;
+        "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
+        "-a"|"--all-url") shift ; ALL="$1" ;;
+        "-f"|"--full") WHAT= ;;
+        *) break;
+    esac
+    shift
+done
+[ -z $1 ] && exit 1
+
+set -e
+umask 0002
+
+ARC="$1"
+
+cd "$DEST/remo"
+mkdir -p "$DEST/log"
+
+{
+    if [ "$ARC" = all ] ; then
+        echo all $ALL
+    else
+        grep -a '^URL:' "$DEST/remo/all/${ARC}arch.rdf" | \
+        sed -r \
+            -e "s!URL: *(.*)\$!$ARC \1!" \
+            -e 's!\r$!!' \
+            -e 's! *$!!' \
+            -e 's!/$!!'
+    fi
+} |
+{
+    read arc url
+    
+    log $arc $url begin 
+    trap "set +x ; log $arc $url stop ; trap - ERR" exit
+    trap "set +x ; log $arc $url error" ERR
+
+    mkdir -p $arc
+    cd $arc
+
+    ndirs=$(sed -e 's!^[^:]*://[^/]*!!' -e 's![^/]!!g' <<< $url)
+    ndirs=${#ndirs}
+
+    [ $arc = all ] && WHAT=
+
+	set -x
+    wget $WHAT \
+         -t 2 --read-timeout=90 \
+         -m \
+         -np -nH --cut-dirs=$ndirs \
+         -nv -o "$DEST/log/$ARC.log" "$url"
+    set +x
+
+    log $arc $url end
+} 

@@ -1,0 +1,29 @@
+#!/bin/sh
+# Outils de manipulation de la base RePEc
+#
+# usage: repec [-h|--help] COMMANDE [ARGS...]
+#
+# La plupart des commandes devraient accepter l'option --help.
+#
+# Les COMMANDEs disponibles sont :
+
+BIN="$(cd $(dirname $0) ; pwd)"
+CMD="$(basename $0)"
+
+usage ()
+{
+    SUB=$(cd "$BIN" && ls "$CMD-"* 2>/dev/null | sed "s/^$CMD-//g")
+    sed -n '2,/^$/ { s/^ *#// ; s/^ //g ; t ok ; d ; :ok ; p }' <$0
+    [ -z "$SUB" ] || for s in $SUB
+    do
+        printf "\t$s\t\t$(sed -n '2 { s/^ *# // ; p }' $BIN/$CMD-$s)\n"
+    done
+}
+
+[ "x$1" = "x-h" -o "x$1" = "x--help" ] && usage && exit
+[ $# -lt 1 ] && exit 1
+
+CMD="$CMD-$1"
+shift
+[ ! -x "$BIN/$CMD" ] && exit 1
+exec "$BIN/$CMD" "$@"
