@@ -46,7 +46,7 @@ done
 
 set -e
 
-mkdir -p "$DEST/log"
+mkdir "$DEST/log"
 
 [ ! -d "$DEST/remo/all" ] && repec-mirror-archive $ARGS all
 
