@@ -72,9 +72,10 @@ mkdir -p "$DEST/log"
 
     $INIT_ONLY && test -d $arc && log $arc $url skipped && exit
     
-    log $arc $url begin 
-    trap "set +x ; log $arc $url stop ; trap - ERR" exit
-    trap "set +x ; log $arc $url error" ERR
+    log $arc $url begin
+    clean () { cd "$DEST/remo" ; [ "$(ls -A $1)" ] || rmdir $1 ; }
+    trap "log $arc $url stop ; trap - ERR" exit
+    trap "clean $arc ; log $arc $url error" ERR
 
     mkdir -p $arc
     cd $arc
@@ -90,5 +91,6 @@ mkdir -p "$DEST/log"
          -np -nH --cut-dirs=$ndirs \
          -o "$DEST/log/$ARC.log" "$url"
 
+    trap - exit
     log $arc $url end
 } 
