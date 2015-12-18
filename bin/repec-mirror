@@ -44,8 +44,6 @@ do
     shift
 done
 
-set -e
-
 mkdir -p "$DEST/log"
 
 [ ! -d "$DEST/remo/all" ] && repec-mirror-archive $ARGS all
