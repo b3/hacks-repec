@@ -50,5 +50,6 @@ mkdir -p "$DEST/log"
 
 for arc in $(cd "$DEST/remo/all" ; ls -1 ???arch.rdf | cut -c1-3)
 do
+    [ $arc = ntu ] && continue
     repec-mirror-archive $ARGS $arc
 done
