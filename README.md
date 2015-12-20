@@ -18,6 +18,10 @@ L'état d'avancement de cette tentative est accessible en ligne sur
 
 Ensuite on essaiera de créer un graphe des liens entre co-auteurs.
 
+## Acrhives à problème
+
+* ntu : boucle lors du téléchargement
+
 # Droits
 
 Copyright (C) 2015 Bruno BEAUFILS.
