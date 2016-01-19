@@ -7,24 +7,33 @@ Le but final est de pouvoir construire un service de visualisation/étude du
 réseau de co-auteurs en économie sur des *snapshots* complet des données de la
 base à des moments différents.
 
-Dans un premier temps on essaie de mettre au point de simples scripts
-permettant de disposer d'un *dump* (le plus complet possible) des données
-bibliographiques publiques disponibles dans [RePEc](http://repec.org). Pour
-cela il est nécessaire de comprendre et documenter le fonctionnement technique
-de cette base.
+Dans un premier temps on essaie :
 
-L'état d'avancement de cette tentative est accessible en ligne sur
+1. de mettre au point de simples scripts permettant de disposer d'un *dump*
+   (le plus complet possible) des données bibliographiques publiques
+   disponibles dans [RePEc](http://repec.org) ;
+
+2. de générer un graphe des liens entre co-auteurs à partir des données
+   bibliographiques récupérées.
+
+Pour cela il est nécessaire de comprendre et documenter le fonctionnement
+technique de cette base.
+
+L'état d'avancement de la tentative de récupération des notices
+bibliographiques de la base est accessible en ligne sur
 <http://test.boulgour.com/repec>.
 
-Ensuite on essaiera de créer un graphe des liens entre co-auteurs.
 
-## Acrhives à problème
+# Contenu
 
-* ntu : boucle lors du téléchargement
+* `bin` contient les scripts et programmes créées
+* `doc` contient des documentations (synthèse, listes de références, conventions de nommage, CR de réunions, etc.)
+* `src` contient les archives d'outils extérieurs récupérés
+
 
 # Droits
 
-Copyright (C) 2015 Bruno BEAUFILS.
+Copyright (C) 2015-2016 Bruno BEAUFILS.
 
 Les scripts distribués ici le sont sous les termes de la *licence général
 publique GPL, version 2*, disponible dans le fichier [GNU-GPL](GNU-GPL).
