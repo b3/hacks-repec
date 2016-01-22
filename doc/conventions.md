@@ -1,4 +1,6 @@
-# Stockage des fichiers
+# Conventions de travail
+
+## Stockage des fichiers
 
 Les programmes directement exécutables (shell, perl, binaire) doivent être stockés dans `bin`.
 
@@ -8,11 +10,11 @@ Les comptes-rendus de réunions doivent être stockés dans `doc/cr` sous la for
 
 Les archives récupérées contenant des programmes extérieurs doivent être stockés `ext`
 
-# Nommage des fichiers
+## Nommage des fichiers
 
 Les fichiers stockés dans `doc` doivent être nommés en utilisant uniquement des caractères minuscules et en se limitant aux lettres latines, chiffres arabes et au tiret (`-`). On utilise le point (`.`) uniquement pour séparer le nom du fichier de son extension (`.md` par exemple).
 
-# Format des fichiers
+## Format des fichiers
 
 On utilise uniquement des fichiers dont le contenu est dans un format ouvert *et* libre (pas de word, powerpoint, OOXML, etc.).
 
