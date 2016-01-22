@@ -26,9 +26,9 @@ bibliographiques de la base est accessible en ligne sur
 
 # Contenu
 
-* `bin` contient les scripts et programmes créées
-* `doc` contient des documentations (synthèse, listes de références, conventions de nommage, CR de réunions, etc.)
-* `ext` contient les archives d'outils extérieurs récupérés
+* [`bin`](bin) contient les scripts et programmes créées
+* [`doc`](doc) contient des documentations (synthèse, listes de références, conventions de nommage, CR de réunions, etc.)
+* [`ext`](ext) contient les archives d'outils extérieurs récupérés
 
 
 # Droits
