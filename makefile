@@ -14,3 +14,15 @@ check:
 push:
 	git push boulgour master
 	git push github master
+
+.PHONY: github
+# récupérer les modifications depuis github et synchroniser
+github:
+	git pull github master
+	git push boulgour master
+
+.PHONY: boulgour
+# récupérer les modifications depuis boulgour et synchroniser
+boulgour:
+	git pull boulgour master
+	git push github master
