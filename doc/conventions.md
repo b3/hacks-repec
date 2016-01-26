@@ -20,6 +20,8 @@ On utilise uniquement des fichiers dont le contenu est dans un format ouvert *et
 
 Pour les documentations on essaie de se limiter à utiliser le format [Markdown à la sauce Github](https://guides.github.com/features/mastering-markdown) (on utilise donc le suffixe `.md` pour le nom du fichier).
 
+Les fichiers texte sont encodés en **UTF-8** et rien d'autre (pas d'UTF-16 *à la* Mac OS ou Windows-1252 *à la* Windows).
+
 ## Fonctionnement des programmes
 
 Tous les programmes crées doivent être utilisables en ligne de commande.
