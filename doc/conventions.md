@@ -34,8 +34,8 @@ Modèle de script minimal avec le traitement de la doc.
 
 usage: script [OPTIONS] ARGUMENTS...
 
-La doc complète doit venir ici. Toutes valeurs utilisées par défaut doit y
-être spécifiée.
+La doc complète doit venir ici. Toutes valeurs utilisées par défaut doivent y
+être spécifiées.
 
 OPTIONS possibles :
     -h, --help   affiche ce message d'aide
