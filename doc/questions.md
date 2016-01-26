@@ -6,7 +6,7 @@ Ce sont des notices de type `Template-Type: ReDIF-Paper 1.0`. Reste à voir si l
 
 ## Est-ce que cette l'information de classification d'une publication est présente de manière **fiable** dans la base ?
 
-## Quelle est le taux de publication sans information de classification accessible directement dans la base ?
+## Quel est le taux de publications sans information de classification accessible directement dans la base ?
 
 
 # Questions fermées
