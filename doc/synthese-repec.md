@@ -35,13 +35,13 @@ L'outil [RePEc Data Check](http://econpapers.repec.org/check) donne accès à de
 Si il est possible d'accéder à toutes les données depuis un même dépôt (grâce à la réplication des archives au sein des institutions participantes), cela ne garanti en rien que les données ainsi récoltées soient correctes et à jour. La seule manière de s'assurer d'avoir les bonnes données est d'interroger le dépôt archives de chaque éditeur. 
 
 Techniquement parlant, les standards utilisés sont : 
-- le format ReDIF [Research Documents Information Format] (syntaxe de type clé/valeur) ;
+- le format ReDIF (*Research Documents Information Format*) avec une syntaxe de type clé/valeur ;
   http://openlib.org/acmes/root/docu/redif_1.html 
 
-- le format AMF [Academic Metadata Format] (syntaxe de type XML) ;
+- le format AMF (*Academic Metadata Format*) avec une syntaxe de type XML ;
   http://amf.openlib.org/doc/ebisu.html
 
-- le protocole OAI/PMH [Open Archives Initiative - Protocol for Metadata Harvesting] pour l'échange et le moissonage de données. 
+- le protocole OAI/PMH (Open Archives Initiative - Protocol for Metadata Harvesting) pour l'échange et le moissonage de données. 
   https://www.openarchives.org/pmh/ 
  
 Les données relatives aux personnes (auteurs, éditeurs, ...) sont accessible via l'archive `RePEc:per` (via ce lien : ??????). A noter que les données de citations ne son 
