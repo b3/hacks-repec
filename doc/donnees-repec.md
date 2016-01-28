@@ -77,7 +77,7 @@ Les formats de données
 
 Dans le cadre de nos travaux, les formats de modèles qui nous intéressent sont les suivants :
 
-- Publication (paper)
+- Working paper (paper)
 	- template vide: https://ideas.repec.org/paper.rdf
 	- documentation: https://ideas.repec.org/t/papertemplate.html
 - Article (article)
@@ -89,6 +89,8 @@ Dans le cadre de nos travaux, les formats de modèles qui nous intéressent sont
 - Livre (book)
 	- template vide: https://ideas.repec.org/book.rdf
 	- documentation: https://ideas.repec.org/t/booktemplate.html
+
+>Qu'est-ce qu'un working paper (WP) ? Particulièrement important en sciences économiques, le working paper est un document qui fournit les résultats détaillés d'une recherche. Dans le monde académique, il est considéré comme une prepublication, ou preprint, c'est-à-dire un projet d'article en attente de parution dans une revue scientifique. Le réseau RePEc est l'acteur majeur de la diffusion de la littérature grise en économie, et notamment des working papers. [Source: [site de l'Université de Rennes 1](http://focus.univ-rennes1.fr/content.php?pid=467792&sid=5722677)]
 
 La liste de tous les templates est disponible à cette adresse : https://ideas.repec.org/templates.html
 
