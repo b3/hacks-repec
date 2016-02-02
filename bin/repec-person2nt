@@ -7,8 +7,8 @@
 # type 'Template-Type: ReDIF-Person 1.0' tel qu'on les trouve dans l'archive
 # 'per' de la base RePEc.
 #
-# Les triplets RDF sont affichés au format N-Triple [1] sur la sortie
-# standard.
+# Les triplets RDF sont affichés au format "Canonical N-Triple" [1] sur la
+# sortie standard.
 #
 # Ces triplets mettent en relation :
 #
