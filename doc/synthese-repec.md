@@ -19,9 +19,10 @@ informations le concernant.
 RePEc est un projet pensé de manière décentralisée qui recouvrent des données issues de différents sources. Certaines données ne sont accessibles que sur demande, en particulier celles liées à la vie privée (tels que des adresses emails par exemple). Pour un usage commercial des données, il est demandé de prendre contact d'abord avec les personnes en charge de RePEc.
 On trouvera la documentation qui explique comment mettre en place un serveur RePEc à l'adresse suivante : https://ideas.repec.org/stepbystep.html.
  
-Les métadonnées principales (*core metadata*) sont communiquées par les éditeurs. Certains services RePEc viennent par la suite enrichir ces données. 
-Chaque éditeur met à disposition ces métadonnées via le web ou un serveur FTP anonyme (c'est à dire qui ne nécessite pas d'identifiant).
-Les adresses qui donnent accès à ces données sont disponibles dans les modèles d'archive qui sont eux même référencés dans l'archive intitulé `RePEc:all` (accessible ici : ftp://all.repec.org/RePEc/all/). 
+ Les métadonnées principales (*core metadata*) sont communiquées par les éditeurs. Certains services RePEc viennent par la suite enrichir ces données.
+ 
+ Chaque éditeur met à disposition ces métadonnées via le web ou un serveur FTP anonyme (c'est à dire qui ne nécessite pas d'identifiant). Les adresses qui donnent accès à ces données sont disponibles dans les modèles d'archive qui sont eux même référencés dans l'archive intitulé `RePEc:all` (accessible ici : ftp://all.repec.org/RePEc/all/).
+
 Pour résumer, la manière standard pour acquérir les données de base est de passer par les archives des éditeurs. Pour ce faire deux outils en ligne de commande (développés en PERL), sont mis à disposition : 
  
 - `remi` : Mirror RePEc data. Ce programme permet de récupérer les données RePEc sur les différentes archives participantes. Version actuelle : 1.4a 
@@ -32,7 +33,7 @@ Pour résumer, la manière standard pour acquérir les données de base est de p
 
 L'outil [RePEc Data Check](http://econpapers.repec.org/check) donne accès à des données statistiques sur les erreurs rencontrés lors du moissonnage des différentes dépôts.
  
-Si il est possible d'accéder à toutes les données depuis un même dépôt (grâce à la réplication des archives au sein des institutions participantes), cela ne garanti en rien que les données ainsi récoltées soient correctes et à jour. La seule manière de s'assurer d'avoir les bonnes données est d'interroger le dépôt archives de chaque éditeur. 
+S'il est possible d'accéder à toutes les données depuis un même dépôt (grâce à la réplication des archives au sein des institutions participantes), cela ne garanti en rien que les données ainsi récoltées soient correctes et à jour. La seule manière de s'assurer d'avoir les bonnes données est d'interroger le dépôt archives de chaque éditeur. 
 
 Techniquement parlant, les standards utilisés sont : 
 - le format ReDIF (*Research Documents Information Format*) avec une syntaxe de type clé/valeur ;
@@ -44,14 +45,9 @@ Techniquement parlant, les standards utilisés sont :
 - le protocole OAI/PMH (Open Archives Initiative - Protocol for Metadata Harvesting) pour l'échange et le moissonage de données. 
   https://www.openarchives.org/pmh/ 
  
-Les données relatives aux personnes (auteurs, éditeurs, ...) sont accessible via l'archive `RePEc:per` (via ce lien : ??????). A noter que les données de citations ne son 
-
 ## Les fichiers ReDIF
 
-Un fichier ReDIF (Research Document Information Format) est un fichier texte de métadonnées concernant une publication 
-(nom, prénom, organisme de rattachement). Ces derniers se présentent sous des répertoires, dont les noms se composent de trois
-lettres. A l'intérieur, on retrouve les fichiers ReDIF. Un répertoire peut contenir plusieurs fichiers ReDIF, et c'est souvent
-le cas. 
+Un fichier ReDIF (Research Document Information Format) est un fichier texte de métadonnées concernant une publication (nom, prénom, organisme de rattachement). Ces derniers se présentent sous des répertoires, dont les noms se composent de trois lettres. A l'intérieur, on retrouve les fichiers ReDIF. Un répertoire peut contenir plusieurs fichiers ReDIF, et c'est souvent le cas. 
 
 ## Le format d'un fichier ReDIF
 
@@ -127,14 +123,16 @@ _Template vide : https://ideas.repec.org/chapter.rdf
 Source : https://ideas.repec.org/t/chaptertemplate.html_
 
 
-##L'archive per 
+## L'archive per 
 
-L'archive per collecte et répertorie les informations sur les auteurs enregistrés sur authors.repec.org au sein d'une seul archive en .ReDif. L'ensemble de l'archive per est disponible ici : ftp://authors.repec.org/RePEc/per/ . 
+L'archive `per` collecte et répertorie les informations sur les auteurs enregistrés sur authors.repec.org au sein d'une seul archive en ReDIF. L'ensemble de l'archive `per` est disponible ici : ftp://authors.repec.org/RePEc/per.
+
 On retrouve tous les auteurs enregistrés sur RePec classés par ordre alphabétique. 
-L'avantage est double : 
- - Premièrement, on dispose de tous les auteurs mais aussi et surtout des papiers, articles, livres etc... auquels ils ont contribué. En littérature grise on retrouve le template author-paper ; en article publiés on retrouve author-article ; en livres, author-book ; en chapitres, author-chapter, etc...
- - Deuxièmement, on dispose de l'identifiant unique de l'auteur, c'est-à-dire la série de trois lettres et de plusieurs chiffres qui identifient l'auteur sur le serveur ; exemple : "pga1000.rdf". Avec cette méthode, on peut éviter le problème des homonymes.
 
+L'avantage est double : 
+
+- Premièrement, on dispose de tous les auteurs mais aussi et surtout des papiers, articles, livres etc. auxquels ils ont contribué. En littérature grise on retrouve le template `author-paper` ; en article publiés on retrouve `author-article` ; en livres, `author-book` ; en chapitres, `author-chapter`, etc.
+ - Deuxièmement, on dispose de l'identifiant unique de l'auteur, c'est-à-dire la série de trois lettres et de plusieurs chiffres qui identifient l'auteur sur le serveur ; exemple : `pga1000.rdf`. Avec cette méthode, on peut éviter le problème des homonymes.
 
 
 **Template-Type:** ReDIF-Person 1.0
@@ -179,4 +177,4 @@ where authority is the code of the authority, archive_identifier is the identifi
 
 **Registered-Date:** Date d'enregistrement.
 
-_Source : http://openlib.org/acmes/root/docu/redif_1.html_
+Source : http://openlib.org/acmes/root/docu/redif_1.html_
