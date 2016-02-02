@@ -123,7 +123,7 @@ _Template vide : https://ideas.repec.org/chapter.rdf
 Source : https://ideas.repec.org/t/chaptertemplate.html_
 
 
-## L'archive per 
+## L'archive `per`
 
 L'archive `per` collecte et répertorie les informations sur les auteurs enregistrés sur authors.repec.org au sein d'une seul archive en ReDIF. L'ensemble de l'archive `per` est disponible ici : ftp://authors.repec.org/RePEc/per.
 
@@ -177,4 +177,4 @@ where authority is the code of the authority, archive_identifier is the identifi
 
 **Registered-Date:** Date d'enregistrement.
 
-Source : http://openlib.org/acmes/root/docu/redif_1.html_
+Source : http://openlib.org/acmes/root/docu/redif_1.html
