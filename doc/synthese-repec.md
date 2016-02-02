@@ -125,3 +125,12 @@ Les différents auteurs peuvent être indexés sous un grand nombre de noms diff
 `John M. Keynes`, `Keynes John Maynard`, etc. Il y a aussi les préfixes et suffixes (Dr, Mr, Mrs, etc.), les erreurs d'orthographe,
 les homonymes, etc. Cependant, le système d'enregistrement sur RePEc permet aux auteurs de retrouver automatiquement l'index sous 
 lequel ils sont enregistrés.
+
+##L'archive per 
+
+L'archive per collecte et répertorie les informations sur les auteurs enregistrés sur authors.repec.org au sein d'une seul archive en .ReDif. L'ensemble de l'archive per est disponible ici : ftp://authors.repec.org/RePEc/per/ . 
+On retrouve tous les auteurs enregistrés sur RePec classés par ordre alphabétique. 
+L'avantage est double : 
+ - Premièrement, on dispose de tous les auteurs mais aussi et surtout des papiers, articles, livres etc... auquels ils ont contribué. En littérature grise on retrouve le template author-paper ; en article publiés on retrouve author-article ; en livres, author-book ; en chapitres, author-chapter, etc...
+ - Deuxièmement, on dispose de l'identifiant unique de l'auteur, c'est-à-dire la série de trois lettres et de plusieurs chiffres qui identifient l'auteur sur le serveur ; exemple : "pga1000.rdf". Avec cette méthode, on peut éviter le problème des homonymes.
+
