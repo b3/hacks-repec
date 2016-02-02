@@ -132,7 +132,7 @@ On retrouve tous les auteurs enregistrés sur RePec classés par ordre alphabét
 L'avantage est double : 
 
 - Premièrement, on dispose de tous les auteurs mais aussi et surtout des papiers, articles, livres etc. auxquels ils ont contribué. En littérature grise on retrouve le template `author-paper` ; en article publiés on retrouve `author-article` ; en livres, `author-book` ; en chapitres, `author-chapter`, etc.
- - Deuxièmement, on dispose de l'identifiant unique de l'auteur, c'est-à-dire la série de trois lettres et de plusieurs chiffres qui identifient l'auteur sur le serveur ; exemple : `pga1000.rdf`. Avec cette méthode, on peut éviter le problème des homonymes.
+- Deuxièmement, on dispose de l'identifiant unique de l'auteur, c'est-à-dire la série de trois lettres et de plusieurs chiffres qui identifient l'auteur sur le serveur ; exemple : `pga1000.rdf`. Avec cette méthode, on peut éviter le problème des homonymes.
 
 
 **Template-Type:** ReDIF-Person 1.0
