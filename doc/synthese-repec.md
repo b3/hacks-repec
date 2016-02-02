@@ -134,3 +134,46 @@ L'avantage est double :
  - Premièrement, on dispose de tous les auteurs mais aussi et surtout des papiers, articles, livres etc... auquels ils ont contribué. En littérature grise on retrouve le template author-paper ; en article publiés on retrouve author-article ; en livres, author-book ; en chapitres, author-chapter, etc...
  - Deuxièmement, on dispose de l'identifiant unique de l'auteur, c'est-à-dire la série de trois lettres et de plusieurs chiffres qui identifient l'auteur sur le serveur ; exemple : "pga1000.rdf". Avec cette méthode, on peut éviter le problème des homonymes.
 
+
+
+**Template-Type:** ReDIF-Person 1.0
+
+The template must start with this field.
+
+**Handle:** The handle of the person template. This is a mandatory field of the form
+
+**authority:**archive_identifier: yyyy-mm-dd:namestring
+
+where authority is the code of the authority, archive_identifier is the identifier of the archive, yyyy, mm, dd form a year, month and day of the month of a valid date. This date is called the significant date of the person. It is recommended to use the birthday, but any other date in the lifetime of the person is also admissible. Finally namestring is a name string that should resemble the person's name. Blanks is the name are replaced by the underscore character _.
+
+**Name-Full:** Nom complet. Obligatoire.
+
+**Name-First:** Le prénom.
+
+**Name-Last:** Le nom
+
+**Name-Prefix:** Préfixe. Optionnel.
+
+**Name-Middle:** The middle name, ofter given as an initial. Use the full middle name or middle names here. This is an optional field.
+
+**Name-Suffix:** Suffixes de noms. Optionnel.
+
+**Name-ASCII:** Nom au format ASCII. Optionnel.
+
+**Email:**
+
+**Homepage:**
+
+**Fax, Postal, Phone, Workplace-(ORGANIZATION*)**
+
+**Workplace-Organization:** Lieu de travail.
+
+**Author-Paper, Author-Article, Author-Software, Editor-Series, Author-Book, Editor-Book, and Author-Chapter:** Liste des travaux auxquels à participé l'auteur. Il est généré automatiquement à partir des templates articles, papers etc.
+
+**Classification-scheme:** C'est un code de classification pour le domaine d'activité de la personne. Cela peut-être utile pour produire nos graphes. Seulement, ce n'est pas obligatoire.
+
+**Short-Id:** Ce dont nous avons parlé plus tôt : un identifiant UNIQUE pour l'auteur obligatoire et généré automatiquement.
+
+**Last-Login-Date:** : Dernière date de connexion.
+
+**Registered-Date:** Date d'enregistrement.
