@@ -1,0 +1,39 @@
+#!/bin/bash
+# Produit des triplets RDF à partir d'un fichier ReDIF de l'archive per
+# 
+# usage: repec-person2nt [OPTIONS] FILE
+#
+# FILE est un fichier ReDIF qui contient un seul enregistrement de
+# type 'Template-Type: ReDIF-Person 1.0' tel qu'on les trouve dans l'archive
+# 'per' de la base RePEc.
+#
+# Les triplets RDF sont affichés au format N-Triple [1] sur la sortie
+# standard.
+#
+# Ces triplets mettent en relation :
+#
+#  - un auteur à son nom
+#
+#  - un auteur à ses articles
+#
+#  - un auteur à sa date de dernière connection sur http://authors.repec.org
+#
+#  - un auteur à une URL permettant d'accéder à une source ReDIF le
+#    définissant dans une copie de l'archive 'per'.
+#
+#    Par défaut on utilise la copie de ce fichier dans l'archive de test
+#    (d'URL de base http://test.boulgour.com/repec/remo/per/pers).
+#
+# L'auteur est identifié par son 'Short-Id' RePEc. Les articles sont
+# identifiés par leur 'Handle' RePEc.
+#
+# [1]: https://www.w3.org/TR/n-triples/
+#
+# OPTIONS possibles :
+#     -h, --help          affiche ce message
+#     -b, --base-url      URL de base pour le lien source
+
+doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
+
+doc
+
