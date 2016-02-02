@@ -118,13 +118,14 @@ Documentation : https://ideas.repec.org/t/booktemplate.html
  - `Title:`
  - `Handle:`
  
-Template vide : https://ideas.repec.org/chapter.rdf
-Documentation : https://ideas.repec.org/t/chaptertemplate.html
-
 Les différents auteurs peuvent être indexés sous un grand nombre de noms différents. Par exemple : `John Maynard Keynes`, 
 `John M. Keynes`, `Keynes John Maynard`, etc. Il y a aussi les préfixes et suffixes (Dr, Mr, Mrs, etc.), les erreurs d'orthographe,
 les homonymes, etc. Cependant, le système d'enregistrement sur RePEc permet aux auteurs de retrouver automatiquement l'index sous 
 lequel ils sont enregistrés.
+
+_Template vide : https://ideas.repec.org/chapter.rdf
+Source : https://ideas.repec.org/t/chaptertemplate.html_
+
 
 ##L'archive per 
 
@@ -177,3 +178,5 @@ where authority is the code of the authority, archive_identifier is the identifi
 **Last-Login-Date:** : Dernière date de connexion.
 
 **Registered-Date:** Date d'enregistrement.
+
+_Source : http://openlib.org/acmes/root/docu/redif_1.html_
