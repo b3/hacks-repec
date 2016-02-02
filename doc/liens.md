@@ -21,6 +21,10 @@
 - Tutorial to help you build a RePEc archive for your department or institution https://ideas.repec.org/stepbystep.html
 - EconPapers FAQ for Archive Maintainers http://econpapers.repec.org/archiveFAQ.htm
 
+### Références
+
+- [n-triples](https://www.w3.org/TR/n-triples)
+
 
 ## Articles
 
