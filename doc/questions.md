@@ -10,7 +10,7 @@ Dans les fichiers ReDif, la classification de la publication n'est pas obligatoi
 
 ## Quel est le taux de publications sans information de classification accessible directement dans la base ?
 
-J'ai trouvé un script Perl installable facilement sur un serveur qui permet de parcourir les champs de fichiers ReDif : https://ideas.repec.org/c/rpc/script/paperscript.html. Ca peut être un moyen d'obtenir le taux des publications sans classification.
+J'ai trouvé un script Perl installable facilement sur un serveur qui permet de parcourir les champs de fichiers ReDif : https://ideas.repec.org/c/rpc/script/paperscript.html. Ca peut être un moyen d'obtenir le taux des publications sans classification. 
 
 # Questions fermées
 
