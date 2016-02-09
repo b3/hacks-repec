@@ -24,7 +24,7 @@ Suivant l'installation choisie, exécuter la commande isql-v, /usr/local/virtuos
 
 Accès à la page d'administration web de Virtuoso
 Si le module conductor a été installé, l'interface d'administration est accessible 
-à l'adresse http://localhost:[port]/conductor.
+à l'adresse http://localhost:[port]/conductor. 
 
 _ Source : http://fr.dbpedia.org/wiki/D%C3%A9ploiement_de_Virtuoso#D.C3.A9marrage_de_virtuoso _
 
