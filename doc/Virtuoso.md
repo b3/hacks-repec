@@ -31,3 +31,13 @@ _ Source : http://fr.dbpedia.org/wiki/D%C3%A9ploiement_de_Virtuoso#D.C3.A9marrag
 ### Accès
 
 Après installation, pour accéder à Virtuoso sur le dump REPEC de Bruno il suffit d'utiliser : http://test.boulgour.com:8890/. 
+
+Voici le code utilisé pour tenter des requêtes SPARQL sur la base :
+
+` ld_dir ('/home/repec/data/', '*.nt', 'repec-per');
+set isolation='uncommitted';
+rdf_loader_run(); `
+
+Toutefois, le moteur retourne : "The statement execution did not return a result set".
+
+
