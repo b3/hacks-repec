@@ -45,3 +45,11 @@
 - ftp://all.repec.org/RePEc/all/root/soft/
 - http://openlib.org/acmes/root/soft/
 - ftp://repec.oru.se/RePEc/cpd/soft
+
+
+## Ressources sur le langage SPARQL
+
+- [Traduction française de la spécification SPARQL du W3C](http://www.yoyodesign.org/doc/w3c/rdf-sparql-query/)
+- [Éléments de syntaxe SPARQL 1.1] (http://www.iro.umontreal.ca/~lapalme/ift6282/SparqlSyntaxe.html)
+- [Introduction à SPARQL - Karl Dubost](http://www.la-grange.net/2009/02/24/etincelles-semantique)
+- [Introduction aux RDF & SPARQL - Open Data Support](http://fr.slideshare.net/OpenDataSupport/introduction-to-rdf-sparql-v013-fr/)
