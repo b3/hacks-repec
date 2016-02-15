@@ -24,7 +24,8 @@
 
 ### Références
 
-- [n-triples](https://www.w3.org/TR/n-triples) ([grammaire à respecter](https://www.w3.org/TR/n-triples/#n-triples-grammar))
+- [le format ReDIF](http://openlib.org/acmes/root/docu/redif_1.html)
+- [le format n-triples](https://www.w3.org/TR/n-triples) ([grammaire à respecter](https://www.w3.org/TR/n-triples/#n-triples-grammar))
 
 
 ## Articles
