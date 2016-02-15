@@ -7,6 +7,7 @@
 - ReDIF templates checker http://econpapers.repec.org/scripts/redifcheck.pl 
 - RePEc scripts https://ideas.repec.org/s/rpc/script.html
 - Script de migration pour les handles ftp://repec.oru.se/RePEc/cpd/conf/migrate.cfg
+- Academic Contributor Information System (l'outil derrière "RePEc Author Service") http://acis.openlib.org/software/
 
 
 ## Documentation
