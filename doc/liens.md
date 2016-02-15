@@ -24,7 +24,7 @@
 
 ### Références
 
-- [n-triples](https://www.w3.org/TR/n-triples)
+- [n-triples](https://www.w3.org/TR/n-triples) ([grammaire à respecter](https://www.w3.org/TR/n-triples/#n-triples-grammar))
 
 
 ## Articles
