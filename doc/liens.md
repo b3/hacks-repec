@@ -2,6 +2,7 @@
 
 ## Outils 
 
+- OAI-PMH gateway for RePEc http://oai.repec.org/ (exemple: [récupération des métadonnées d'une publication à partir de son handle](http://oai.repec.org/?verb=GetRecord&metadataPrefix=oai_dc&identifier=oai:RePEc:cup:endeec:v:16:y:2011:i:02:p:239-242_00))
 - RePEc Author Short-ID Lookup https://ideas.repec.org/cgi-bin/shortid.cgi
 - RePEc Data Check http://econpapers.repec.org/check/
 - ReDIF templates checker http://econpapers.repec.org/scripts/redifcheck.pl 
