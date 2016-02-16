@@ -6,6 +6,7 @@
 # Auteurs: Christophe Willaert, Nahid Oulmi
 
 import sys
+import urllib2
 
 # Flag utilisé lorsque l'utilisateur appelle la commande avec le paramètre -b ou --base-url
 url_as_input = False
@@ -46,16 +47,18 @@ def create_triple(subject, predicate, object):
     return '"' + subject + '" ' + predicate + ' "' + object + '" .' + '\n'
 
 
-def parse_file(content):
+def parse_file(content, base_url):
 	author   = ''
 	name	 = ''
 	articles = []
 	papers   = []
 	last_login = ''
+	handle = ''
 	creator_uri = '<http://purl.org/dc/elements/1.1/creator>'
 	name_uri = '<http://xmlns.com/foaf/spec/#term_name>'
 	modified_uri = '<http://purl.org/dc/terms/modified>'
 	identifier_uri = '<http://purl.org/dc/terms/identifier>'
+	source_uri = '<http://purl.org/dc/elements/1.1/source>'
 
 	# On parcours chaque ligne du fichier à analyser
 	for line in content:
@@ -102,23 +105,22 @@ def parse_file(content):
 
 	# On ajoute le triplet RDF avec la source de l'auteur
 	if handle != '':
-		nt_output += create_triple(author, identifier_uri, handle)
+		nt_output += create_triple(author, identifier_uri, '<' + handle + '>')
+
+	# On ajoute le triplet RDF vers le fichier source utilisée
+	nt_output += create_triple(author, source_uri, base_url)
 
 	# On créé les triplets RDF pour chacun des working papers, que l'on stocke dans la variable 'nt_output' de type string
 	for paper in papers:
-		nt_output += create_triple(paper, creator_uri, author)
+		nt_output += create_triple('<' + paper + '>', creator_uri, author)
 
 	# On créé les triplets RDF pour chacun des articles, que l'on stocke dans la variable 'nt_output' de type string
 	for article in articles:
-		nt_output += create_triple(article, creator_uri, author)
+		nt_output += create_triple('<' + article + '>', creator_uri, author)
 
 	# On envoi le tout à la sortie standard
 	sys.stdout.write(nt_output)
 
-	
-# Cas où le script reçoit le contenu du fichier à parser via l'entrée standard (stdin)
-if not sys.stdin.isatty():
-	parse_file(sys.stdin)
 	
 # On supprime le premier argument qui retourne le nom du fichier appelé
 del sys.argv[0]
@@ -139,13 +141,13 @@ for arg in sys.argv:
 			exit(0)
 		else:
 			# Sinon: il nous reste à récupérer l'url en argument (qui est passé en second paramètre, après -b/--base-url)
-			url = arg
+			base_url = arg
 
 			# On tente d'ouvrir le fichier
 			try:
-				file_rdf = open(url, "r")
-				parse_file(file_rdf)
-				file_rdf.close()
+				data = urllib2.urlopen(base_url)
+				parse_file(data, base_url)
 			# Si on ne parvient pas à ouvrir le fichier, on redirige l'erreur sur la sortie des erreurs (stderr)
 			except IOError, err:
 				sys.stderr.write(str(err) + '\n')
+
