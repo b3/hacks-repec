@@ -44,7 +44,7 @@ OPTIONS possibles :
 
 
 def create_triple(subject, predicate, object):
-    return '"' + subject + '" ' + predicate + ' "' + object + '" .' + '\n'
+    return '<' + subject + '> ' + predicate + ' "' + object + '" .' + '\n'
 
 
 def parse_file(content, base_url):
@@ -68,6 +68,8 @@ def parse_file(content, base_url):
 		key = key.lower()
 		# On supprime les caractères espaces éventuels en début et fin de ligne
 		value = value.strip()
+		# On échappe les doubles quotes
+		value = value.replace('"', '\\"')
 
 		# Si la ligne contient le nom de l'auteur, on stocke la valeur dans la variable name
 		if key == 'name-full':
@@ -112,11 +114,11 @@ def parse_file(content, base_url):
 
 	# On créé les triplets RDF pour chacun des working papers, que l'on stocke dans la variable 'nt_output' de type string
 	for paper in papers:
-		nt_output += create_triple('<' + paper + '>', creator_uri, author)
+		nt_output += create_triple(paper, creator_uri, author)
 
 	# On créé les triplets RDF pour chacun des articles, que l'on stocke dans la variable 'nt_output' de type string
 	for article in articles:
-		nt_output += create_triple('<' + article + '>', creator_uri, author)
+		nt_output += create_triple(article, creator_uri, author)
 
 	# On envoi le tout à la sortie standard
 	sys.stdout.write(nt_output)
@@ -150,4 +152,3 @@ for arg in sys.argv:
 			# Si on ne parvient pas à ouvrir le fichier, on redirige l'erreur sur la sortie des erreurs (stderr)
 			except IOError, err:
 				sys.stderr.write(str(err) + '\n')
-
