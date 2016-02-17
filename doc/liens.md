@@ -52,6 +52,7 @@
 
 - [Traduction française de la spécification SPARQL du W3C](http://www.yoyodesign.org/doc/w3c/rdf-sparql-query/)
 - [Éléments de syntaxe SPARQL 1.1] (http://www.iro.umontreal.ca/~lapalme/ift6282/SparqlSyntaxe.html)
+- [SPARQL : Requêtes de lecture - Wikiversité](https://fr.wikiversity.org/wiki/SPARQL_Protocol_and_RDF_Query_Language/Requ%C3%AAtes_de_lecture)
 - [Introduction à SPARQL - Karl Dubost](http://www.la-grange.net/2009/02/24/etincelles-semantique)
 - [Introduction aux RDF & SPARQL - Open Data Support](http://fr.slideshare.net/OpenDataSupport/introduction-to-rdf-sparql-v013-fr/)
 
