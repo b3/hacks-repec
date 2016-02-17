@@ -50,6 +50,7 @@
 
 ## Ressources sur le langage SPARQL
 
+- [Validateur de requêtes SPARQL](http://sparql.org/query-validator.html)
 - [Traduction française de la spécification SPARQL du W3C](http://www.yoyodesign.org/doc/w3c/rdf-sparql-query/)
 - [Éléments de syntaxe SPARQL 1.1] (http://www.iro.umontreal.ca/~lapalme/ift6282/SparqlSyntaxe.html)
 - [SPARQL : Requêtes de lecture - Wikiversité](https://fr.wikiversity.org/wiki/SPARQL_Protocol_and_RDF_Query_Language/Requ%C3%AAtes_de_lecture)
