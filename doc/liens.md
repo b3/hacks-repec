@@ -54,3 +54,9 @@
 - [Éléments de syntaxe SPARQL 1.1] (http://www.iro.umontreal.ca/~lapalme/ift6282/SparqlSyntaxe.html)
 - [Introduction à SPARQL - Karl Dubost](http://www.la-grange.net/2009/02/24/etincelles-semantique)
 - [Introduction aux RDF & SPARQL - Open Data Support](http://fr.slideshare.net/OpenDataSupport/introduction-to-rdf-sparql-v013-fr/)
+
+
+## Ressources relatives à Virtuoso
+
+- [The complete tutorial for RDF data ingestion in Virtuoso](https://confluence.deri.ie:8443/display/webstar/The+complete+tutorial+for+RDF+data+ingestion+in+Virtuoso)
+- [Loading Data Virtuoso | DBPedia docs](https://github.com/dbpedia/dbpedia-docs/wiki/Loading-Data-Virtuoso)
