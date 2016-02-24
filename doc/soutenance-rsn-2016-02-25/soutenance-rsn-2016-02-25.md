@@ -8,8 +8,8 @@
 
 - Crée en 1997
 - Base de données décentralisée 
-- 2 000 000 items recensés dont :
-    - + de 46 500 auteurs
+- 2 000 000 items recensés :
+    - + de 58 700 auteurs
     - + de 1 220 000 articles (publiés) 
     - + de 709 000 papiers (working papers)
     - + de 37 000 chapitres de livre
@@ -21,13 +21,13 @@
 - Objectif : *étudier les réseaux de co-auteurs en Sciences-Économiques*
     - Auteurs des publications présentes dans RePEC
     - Ex: un auteur avec un h-index élevé est-il bien central dans la discipline et dans son champ d’études?
-- Notre mission :
+- Mission :
     - nous approprier les jeux de données
     - nous approprier les notions liées au web sémantique
-    - concevoir une moulinette pour la conversion des données
+    - concevoir un script pour la conversion des données
     - mettre les données converties en base de données
 
-## Accéder aux métadonnées
+## L'accès aux métadonnées
 
 - Accès à l'ensemble des données de RePEc via des accès FTP/HTTP
     - `repec.org` liste tous les sites (*archives*)
@@ -46,13 +46,14 @@
 - Web sémantique
     - un projet des fondateurs du web depuis les années 90
     - porté par le [W3C](http://w3c.org)
-- L'idée
+- Idée
     - rendre l'information accessible aux machines
     - lier l’information avec des données structurées
     - faire du web une bibliothèque géante unifiée
 - On parle désormais de **web des données** (*Linked Data*)
 
-# Éléments du web des données
+
+# Éléments du web sémantique
 
 ## RDF : Resource Description Framework
 
@@ -65,7 +66,7 @@
         - Turtle,
         - N-Triples
         - ...
-- Notre contexte
+- Contexte
     - récupérer les données des fichiers Redif
     - pour les mettre sous la forme de triplets RDF
     - afin de pouvoir analyser les relations entre auteurs
@@ -94,7 +95,7 @@
     - un littéral (c’est-à-dire une chaîne de caractères non-identifiée)
 - Le prédicat doit obligatoirement être un URI ou une URL
 
-# Produire les données
+# Produire les triplets RDF
 
 
 ## Créer un parseur de fichiers ReDif
@@ -106,28 +107,23 @@
     - Prénoms
     - Domaine d’activité
     - Ensemble des documents auxquels aura participé l’auteur 
-- Pour l’ensemble des 30 000 auteurs enregistrés
-    
-## Notre parseur en Python
 
-Problème : comment intégrer le code ?
+- Pour l’ensemble des auteurs enregistrés
 
 ## Prendre des fichiers en argument
 
-- 30 000 fichiers ReDIF à traiter
+- Plus de 58 700 fichiers ReDIF à traiter
     - automatisation de la tâche nécessaire
-- **Bash** = langage de programmation des systèmes Unix
+- **Bash** : langage de programmation des systèmes Unix
 - Avec Bash et Python nous pouvons prendre en argument une infinité de fichiers
 
 ## Organiser l’information sous forme de N-Triples
 
 - Souvenez-vous des N-Triples : **(Sujet – Prédicat – Objet)**
 - Exemple dans notre cas :
-    - Sujet = Auteur
-    - Prédicat = Document
-    - Objet = Co-Auteur.
+- 
+![exemple de conversion](rdf2nt.png)
 
-C’est simple non ?
 
 ## Enrichir ces données
 
@@ -142,7 +138,23 @@ C’est simple non ?
 
 # Rendre les données accessibles
 
-## Un outil pour le web sémantique
+## Deux types de bases de données
+
+- Bases de données sémantiques (triplestores)
+    - logique pure / approche académique
+    - hautement complexe
+    - met l'accent sur le raisonnement
+        - notion d'inférences
+        - notion d'ontologies
+    - met l'accent sur la précision (le plus complet possible)
+ 
+- Bases de données orientées graphes
+    - pragmatisme
+    - complexité intermédiaire
+    - faciliter pour traverser les graphes
+    - plus performant
+
+## Choix de Virtuoso
 
 - Virtuoso est un *triplestore*
     - Base conçue pour les données RDF ... mais pas seulement
@@ -155,18 +167,19 @@ C’est simple non ?
 ## Utilisation de Virtuoso
 
 - Accès : 
-    - web via l’outil Conductor (interface graphique via un navigateur)
-    - en ligne de commande via iSQL
+    - web via l’outil Conductor (interface graphique depuis un navigateur)
+    - en ligne de commande via iSQL (commande *isql-vt*)
 - Syntaxe : 
-    - Langage SQL intégré
-    - Langage SPARQL
+    - langage SQL intégré
+    - langage SPARQL
 
 ## SPARQL
 
 - Langage de requêtes pour des données RDF
 - Equivalent au SQL mais pour le web sémantique
 - Standardisé par le W3C depuis 2008
-- Sélectionner le nœuds d’un graphe RDF ainsi que les liens qui les composent.
+- Permet de sélectionner le nœuds d’un graphe RDF
+ ainsi que les liens qui les composent.
 
 ## SPARQL : un exemple
 
