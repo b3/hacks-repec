@@ -8,20 +8,24 @@
 
 - Crée en 1997
 - Base de données décentralisée 
-- 1 800 000 items recensés dont :
-    - 30 000 auteurs
-    - 720 000 articles (publiés) 
-    - 480 000 papiers (working papers)
-    - 15 000 chapitres de livre
-- Métadonnées en *Research Document Information Format*  ([ReDIF](http://openlib.org/acmes/root/docu/redif_1.html))
+- 2 000 000 items recensés dont :
+    - + de 46 500 auteurs
+    - + de 1 220 000 articles (publiés) 
+    - + de 709 000 papiers (working papers)
+    - + de 37 000 chapitres de livre
+- Métadonnées au format **ReDIF** (*Research Document Information Format*)
     
 
 ## Le projet
 
-- Objectif : *étudier des réseaux de co-auteurs en Sciences-Économiques*
+- Objectif : *étudier les réseaux de co-auteurs en Sciences-Économiques*
     - Auteurs des publications présentes dans RePEC
+    - Ex: un auteur avec un h-index élevé est-il bien central dans la discipline et dans son champ d’études?
 - Notre mission :
-    - créer une base de données sémantique de ce réseau d’auteurs
+    - nous approprier les jeux de données
+    - nous approprier les notions liées au web sémantique
+    - concevoir une moulinette pour la conversion des données
+    - mettre les données converties en base de données
 
 ## Accéder aux métadonnées
 
@@ -43,25 +47,29 @@
     - un projet des fondateurs du web depuis les années 90
     - porté par le [W3C](http://w3c.org)
 - L'idée
-    - lier l’information
-    - unifier le web
-    - en faire une bibliothèque géante pour mieux diffuser la connaissance
+    - rendre l'information accessible aux machines
+    - lier l’information avec des données structurées
+    - faire du web une bibliothèque géante unifiée
 - On parle désormais de **web des données** (*Linked Data*)
 
-# Outils du web des données
+# Éléments du web des données
 
 ## RDF : Resource Description Framework
 
 - un cadre de travail pour publier/manipuler des donnés sur le web
 - recouvre à la fois 
     - un modèle liant un *sujet* à un *objet* via un *verbe*
+    - notion de triplets RDF (plus petit élément de connaissance)
     - plusieurs syntaxes de représentations
         - RDF/XML,
         - Turtle,
         - N-Triples
+        - ...
 - Notre contexte
-    - produire des fichiers RDF représentant les liens auteurs-publications
-    - utilisation de la syntaxe N-Triples
+    - récupérer les données des fichiers Redif
+    - pour les mettre sous la forme de triplets RDF
+    - afin de pouvoir analyser les relations entre auteurs
+    - choix de la syntaxe N-Triples pour sa simplicité
 
 ## URI : l'identifiant des objets sur le web
 
