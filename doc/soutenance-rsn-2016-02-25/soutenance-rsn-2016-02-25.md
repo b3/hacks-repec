@@ -40,7 +40,8 @@
 ## Base de données sémantiques ?
 
 - Web sémantique
-    - un projet de fond des fondateurs du web depuis les années 90 ([W3C](http://w3c.org))
+    - un projet des fondateurs du web depuis les années 90
+    - porté par le [W3C](http://w3c.org)
 - L'idée
     - lier l’information
     - unifier le web
@@ -49,9 +50,7 @@
 
 # Outils du web des données
 
-## Le RDF
-
-\structure{Resource Description Framework}
+## RDF : Resource Description Framework
 
 - un cadre de travail pour publier/manipuler des donnés sur le web
 - recouvre à la fois 
@@ -137,7 +136,7 @@ C’est simple non ?
 
 ## Un outil pour le web sémantique
 
-- Virtuoso est un triplestore
+- Virtuoso est un *triplestore*
     - Base conçue pour les données RDF ... mais pas seulement
     - Complet ... mais complexe
     - Installé sur le serveur `test.boulgour.com`
@@ -161,7 +160,22 @@ C’est simple non ?
 - Standardisé par le W3C depuis 2008
 - Sélectionner le nœuds d’un graphe RDF ainsi que les liens qui les composent.
 
-# Conclusions
+## SPARQL : un exemple
+
+Les coauteurs de `pfa122` (Étienne FARVAQUE)
+
+    SELECT DISTINCT "pfa122" ?auteur
+    WHERE
+    {
+        ?publication ?p ?auteur .
+        FILTER (
+		?publication = (SELECT ?publication
+		                WHERE { ?publication <http://purl.org/dc/elements/1.1/creator> "pfa122" })
+        && ?auteur != "pfa122"
+        )
+    };
+
+# Conclusion
 
 ## Étapes de travail restantes
 
