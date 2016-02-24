@@ -70,7 +70,7 @@ La liste de tous les templates est disponible à cette adresse : https://ideas.r
 
 Particulièrement important en sciences économiques, le working paper est un document qui fournit les résultats détaillés d'une recherche. Dans le monde académique, il est considéré comme une prepublication, ou preprint, c'est-à-dire un projet d'article en attente de parution dans une revue scientifique. Le réseau RePEc est l'acteur majeur de la diffusion de la littérature grise en économie, et notamment des working papers. [Source: [site de l'Université de Rennes 1](http://focus.univ-rennes1.fr/content.php?pid=467792&sid=5722677)]
 
-Econpapers met à disposition sur son site un outil pour vérifier la bonne syntaxe des documents créés par les utilisateurs. Des emails sont envoyés tous les mois aux auteurs pour leur signalité des problèmes si des erreurs sont identifés dans les documents qui ont été soumis.
+Econpapers met à disposition sur son site un outil pour vérifier la bonne syntaxe des documents créés par les utilisateurs. Des emails sont envoyés tous les mois aux auteurs pour leur signalité des problèmes si des erreurs sont identifiées dans les documents qui ont été soumis.
 
 
 Identifant unique pour les auteurs
