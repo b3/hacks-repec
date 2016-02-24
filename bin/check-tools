@@ -25,6 +25,6 @@ mute which git || missing git
 
 # Pour la conversion Markdown vers beamer
 mute which pandoc || missing pandoc
-mute which base64 || missing base64
+mute which base64 || missing base64 coreutils
 mute which pdflatex || missing pdflatex texlive
 mute kpsewhich beamer.cls || missing beamer.cls texlive-latex-recommended

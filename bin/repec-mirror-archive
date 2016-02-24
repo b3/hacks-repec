@@ -41,7 +41,7 @@ do
         "-a"|"--all-url") shift ; ALL="$1" ;;
         "-f"|"--full") WHAT= ;;
         "-i"|"--init") INIT_ONLY=true ;;
-        *) break;
+        *) break ;;
     esac
     shift
 done
