@@ -115,6 +115,13 @@
 
 - Pour l’ensemble des auteurs enregistrés
 
+## Notre parseur en Python
+
+ - Trois étapes :
+	- Ranger les données dans des listes
+	- Concaténer ces listes pour avoir des N-Triples
+	- Lui faire comprendre qu'on lui fournit des fichiers en entrée
+
 ## Prendre des fichiers en argument
 
 - Plus de 58 700 fichiers ReDIF à traiter
