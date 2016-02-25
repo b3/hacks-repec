@@ -1,4 +1,4 @@
-% Projet REPEC
+% Projet RePEc
 % Christophe WILLAERT; Nahid OULMI
 % 25 février 2016
 
