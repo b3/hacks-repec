@@ -72,7 +72,7 @@
         - N-Triples
         - ...
 - Contexte
-    - récupérer les données des fichiers Redif
+    - récupérer les données des fichiers ReDIF
     - pour les mettre sous la forme de triplets RDF
     - afin de pouvoir analyser les relations entre auteurs
     - choix de la syntaxe N-Triples pour sa simplicité
@@ -103,7 +103,7 @@
 # Produire les triplets RDF
 
 
-## Créer un parseur de fichiers ReDif
+## Créer un parseur de fichiers ReDIF
 
 - *Parser* un fichier = le parcourir et en extraire les informations utiles
 
