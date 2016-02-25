@@ -135,7 +135,7 @@
 
 - Souvenez-vous des N-Triples : **(Sujet – Prédicat – Objet)**
 - Exemple dans notre cas :
-- 
+ 
 ![exemple de conversion](rdf2nt.png)
 
 
