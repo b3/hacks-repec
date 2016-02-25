@@ -19,7 +19,7 @@
 ## Le projet
 
 - Objectif : *étudier les réseaux de co-auteurs en Sciences-Économiques*
-    - Auteurs des publications présentes dans RePEC
+    - Auteurs des publications présentes dans RePEc
     - Ex: un auteur avec un h-index élevé est-il bien central dans la discipline et dans son champ d’études?
 - Mission :
     - nous approprier les jeux de données
