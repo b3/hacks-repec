@@ -118,9 +118,9 @@
 ## Notre parseur en Python
 
  - Trois étapes :
-	- Ranger les données dans des listes
-	- Concaténer ces listes pour avoir des N-Triples
-	- Lui faire comprendre qu'on lui fournit des fichiers en entrée
+	1. Ranger les données dans des listes
+	2. Concaténer ces listes pour avoir des N-Triples
+	3. Lui faire comprendre qu'on lui fournit des fichiers en entrée
 
 ## Prendre des fichiers en argument
 
@@ -152,7 +152,7 @@
 
 ## Deux types de bases de données
 
-- Bases de données sémantiques (triplestores)
+- Bases de données sémantiques (*triplestores*)
     - logique pure / approche académique
     - hautement complexe
     - met l'accent sur le raisonnement
@@ -179,8 +179,10 @@
 ## Utilisation de Virtuoso
 
 - Accès : 
-    - web via l’outil Conductor (interface graphique depuis un navigateur)
-    - en ligne de commande via iSQL (commande *isql-vt*)
+    - web via l’outil Conductor
+        - interface graphique depuis un navigateur
+    - en ligne de commande via iSQL
+        - commande `isql-vt`
 - Syntaxe : 
     - langage SQL intégré
     - langage SPARQL
@@ -188,23 +190,33 @@
 ## SPARQL
 
 - Langage de requêtes pour des données RDF
-- Equivalent au SQL mais pour le web sémantique
-- Standardisé par le W3C depuis 2008
-- Permet de sélectionner le nœuds d’un graphe RDF
- ainsi que les liens qui les composent.
+    - Equivalent au SQL mais pour le web sémantique
+    - Standardisé par le W3C depuis 2008
+- Permet de sélectionner 
+    - le nœuds d’un graphe RDF
+    - ainsi que les liens qui les composent
 
 ## SPARQL : un exemple
 
 Les coauteurs de `pfa122` (Étienne FARVAQUE)
 
+\small
+
     SELECT DISTINCT "pfa122" ?auteur
     WHERE
     {
         ?publication ?p ?auteur .
-        FILTER (
-		?publication = (SELECT ?publication
-		                WHERE { ?publication <http://purl.org/dc/elements/1.1/creator> "pfa122" })
-        && ?auteur != "pfa122"
+        FILTER
+		(
+		  ?publication =
+		  (
+		    SELECT ?publication
+		    WHERE
+			{
+			  ?publication <http://purl.org/dc/elements/1.1/creator> "pfa122"
+		    }
+	      )
+          && ?auteur != "pfa122"
         )
     };
 
@@ -234,7 +246,7 @@ Les coauteurs de `pfa122` (Étienne FARVAQUE)
 
 - Compréhension des concepts liés au web sémantique
 - Virtuoso:
-    - Difficulté de prise en main de Virtuoso
+    - difficulté de prise en main de Virtuoso
     - pas d'accès à l'interface en ligne de commande
     - pas de feeback lors de l'exécution des requêtes
 - Classification JEL/NEP
