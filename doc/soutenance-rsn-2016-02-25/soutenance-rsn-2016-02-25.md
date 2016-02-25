@@ -9,10 +9,10 @@
 - Crée en 1997
 - Base de données décentralisée 
 - 2 000 000 items recensés :
-    - + de 58 700 auteurs
-    - + de 1 220 000 articles (publiés) 
-    - + de 709 000 papiers (working papers)
-    - + de 37 000 chapitres de livre
+    - \+ de 58 700 auteurs
+    - \+ de 1 220 000 articles (publiés) 
+    - \+ de 709 000 papiers (working papers)
+    - \+ de 37 000 chapitres de livre
 - Métadonnées au format **ReDIF** (*Research Document Information Format*)
 
 
