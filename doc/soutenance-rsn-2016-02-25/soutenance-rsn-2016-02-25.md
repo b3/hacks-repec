@@ -20,7 +20,9 @@
 
 - Objectif : *étudier les réseaux de co-auteurs en Sciences-Économiques*
     - Auteurs des publications présentes dans RePEc
-    - Ex: un auteur avec un h-index élevé est-il bien central dans la discipline et dans son champ d’études?
+    - Exemples de questionnement :
+        - *un auteur avec un h-index élevé est-il bien central dans la discipline ?*
+        - *dans son champ d’études ?*
 - Mission :
     - nous approprier les jeux de données
     - nous approprier les notions liées au web sémantique
