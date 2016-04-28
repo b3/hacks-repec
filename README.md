@@ -21,7 +21,7 @@ technique de cette base.
 
 L'état d'avancement de la tentative de récupération des notices
 bibliographiques de la base est accessible en ligne sur
-<http://test.boulgour.com/repec>.
+<http://dev.repec.fr>.
 
 
 # Contenu
