@@ -8,6 +8,8 @@ Les documents et documentations doivent être stockés dans `doc`.
 
 Les comptes-rendus de réunions doivent être stockés dans `doc/cr` sous la forme `AAAA-MM-JJ-label` avec `AAAA-MM-JJ` la date de la réunion et `label` un identifiant de la réunion (genre `repec-rsn`).
 
+Les supports de présentations des travaux doivent être stockés dans `doc/prez` sous la forme `AAAA-MM-JJ-label` avec `AAAA-MM-JJ` la date de la réunion et `label` un identifiant de la présentation (genre `soutenance-rsn`).
+
 Les archives récupérées contenant des programmes ou librairies extérieurs doivent être stockés dans `ext`.
 
 ## Nommage des fichiers
