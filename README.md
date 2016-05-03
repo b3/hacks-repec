@@ -30,6 +30,10 @@ bibliographiques de la base est accessible en ligne sur
 * [`doc`](doc) contient des documentations (synthèse, listes de références, conventions de nommage, CR de réunions, etc.)
 * [`ext`](ext) contient les archives d'outils extérieurs récupérés
 
+ATTENTION: installer gnu-sed sous OS X (par exemple: brew install gnu-sed --with-default-names) car 
+sinon l'option -r ne sera pas reconnue avec le sed installé par défaut par Apple.
+
+ATTENTION: base64 -D (sous OS X) et -d (sous Linux)
 
 # Droits
 
