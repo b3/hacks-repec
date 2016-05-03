@@ -1,5 +1,6 @@
 #!/bin/bash
 # Convertit un fichier markdown en une présentation via LaTeX/Beamer
+# Copyright (C) 2016 Bruno BEAUFILS
 #
 # usage: md2beamer [OPTIONS] SOURCE [FICHIERS-INCLUS...] 
 #
@@ -20,7 +21,7 @@
 #                          au lieu du niveau 2
 #     -L, --latex          produit le source LaTeX plutôt que le résultat PDF
 #     -c, --check          vérifie la présence des outils nécessaires
-#     -l, --list-check     liste les paquets Debian nécessaires
+#     -l, --list-debian    liste les paquets Debian nécessaires
 #     -d, --debug          conserve le répertoire de travail (/tmp/md2beamer)
 #
 # EXEMPLES
@@ -50,26 +51,26 @@
 #
 # COMMAND est la commande à utiliser pour reconstruire le fichier,
 # généralement c'est cat (quand le contenu est textuel et qu'il faut juste
-# l'extraire) ou base64 -d (quand le contenu du fichier est binaire et qu'on
-# l'a embarqué en base64).
+# l'extraire) ou base64 --decode (quand le contenu du fichier est binaire et
+# qu'on l'a embarqué en base64).
 #
 
-# FIXME: FICHIER devrait pouvoir être un chemin quelconque (absolu par exemple)
+# FIXME: SOURCE et FICHIERS-INCLUS devraient pouvoir être un chemin quelconque (absolu par exemple)
 
 doc () { sed -n '2,/^$/ { s/^ *#// ; s/^ //g ; t ok ; d ; :ok ; p }' <$0 ; }
 err () { echo "$(basename $0): error: $*" 1>&2 ; exit 1 ; }
 log () { date "+%F %T $(basename $0) $*" | tee -a "$LOG" ; }
 abs () { echo $(cd $(dirname $1) ; pwd)/$(basename $1) ; }
 mute () { 1>/dev/null 2>&1 $* ; }
-missing () { err "$1 is unavailable" ; }
+need () { err "$1 is unavailable" ; }
 
 # réussit si les outils nécessaires sont accessibles
 check ()
 {
-    mute which pandoc  || missing pandoc
-    mute which base64 || missing base64 coreutils
-    mute which pdflatex || missing pdflatex texlive-latex-base
-    mute kpsewhich beamer.cls || missing beamer.cls texlive-latex-recommended
+    mute which pandoc || need pandoc
+    mute which base64 || need base64 coreutils
+    mute which pdflatex || need pdflatex texlive-latex-base
+    mute kpsewhich beamer.cls || need beamer.cls texlive-latex-recommended
 }
 
 # extrait un fichier embarqué dans le script
@@ -117,8 +118,8 @@ do
     case "$1" in
         "-h"|"--help") doc && exit ;;
         "-c"|"--check") check && exit ;;
-        "-l"|"--list-check")
-            egrep '\|\| missing' $0 | sed -r 's/^.* (.*)$/\1/'
+        "-l"|"--list-debian")
+            egrep '\|\| need' $0 | sed -r 's/^.* (.*)$/\1/'
             exit
             ;;
         "-t"|"--theme")
@@ -136,6 +137,8 @@ do
     esac
     shift
 done
+
+check || err "needed tools missing"
 
 [ -z $1 ] && err "missing source file"
 SRC=$(abs $1)
@@ -158,7 +161,7 @@ pandoc -s \
        -f markdown+pandoc_title_block+pipe_tables-implicit_figures+link_attributes \
        --toc \
        -t beamer \
-       --template=$TMPDIR/beamer.pandoc \
+       --template=$TMPDIR/beamer-pandoc.tex \
        -V theme=$THEME \
        -V fontsize=10 \
        --slide-level=$SLIDELEVEL \
@@ -172,7 +175,7 @@ if ! $LATEX_ONLY ; then
     mv $dstpdf $DESTDIR
 fi
 
-$DEBUG && { cd .. ; rm -rf $TMPDIR ; }
+$DEBUG || { cd .. ; rm -rf $TMPDIR ; }
 
 ##############################################################################
 
@@ -180,6 +183,8 @@ exit 0
 
 # begin-lille1 beamerthemelille1.sty cat
 % Un thème Beamer pour l'Université de Lille 1
+% Copyright (C) 2015-2016 Bruno BEAUFILS
+% This file is distributed under the terms of the WTFPL license.
 
 % Paramétrages génériques %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -198,7 +203,7 @@ exit 0
 \definecolor{Lille1ViveVert}{RGB}{120,190,32}     % en HTML : 78be20
 \definecolor{Lille1ViveJaune}{RGB}{252,227,0}     % en HTML : fce300
 
-%% Les polices Lyon 2
+%% La police Lille 1 n'est pas libre (Verdana) on prend le truc le plus proche
 \usepackage[scaled=.92]{helvet}
 
 %% Paramétrage hyperref
@@ -282,7 +287,6 @@ exit 0
 }
 \setbeamertemplate{navigation symbols}{} % pas de navigation affichée
 \setbeamertemplate{sidebar right}{}      % pas de logo
-
 
 %% D'autres paramètres Beamer en vrac
 \setbeamercovered{dynamic}      % on découvre lentement les trucs cachés
@@ -474,7 +478,7 @@ Ugo+PgpzdGFydHhyZWYKOTQ0OQolJUVPRgo=
 
 ##############################################################################
 
-# begin-all beamer.pandoc cat
+# begin-all beamer-pandoc.tex cat
 \documentclass[10pt,t]{beamer}
 
 % Paquets LaTeX %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -527,6 +531,7 @@ $endif$
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 
 % Paramétrages Beamer %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 $if(theme)$\usetheme{$theme$}$endif$
 %\setbeameroption{show notes on second screen} % les notes sur le second écran
 
