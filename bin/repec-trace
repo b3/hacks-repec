@@ -26,7 +26,7 @@ out ()
     $HTML || printf "$1\n\n"
     $HTML && printf "    <h2>$1</h2>\n<pre>\n"
     shift 
-    eval $*
+    eval "$*"
     $HTML || printf "\n\n"
     $HTML && printf "</pre>\n\n"
 }
@@ -101,6 +101,9 @@ out "Derniers téléchargements" \
 
 out "Taille disque utilisée" \
     "du -shc *"
+
+out "Nombre de fichiers ReDIF" \
+    "find remo -type f -name '*.rdf' | wc -l"
 
 $HTML && cat <<EOF
   </body>
