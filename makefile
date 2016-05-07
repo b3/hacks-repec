@@ -1,13 +1,15 @@
 all: help
 
+SED=sed$(shell { sed v </dev/null >/dev/null 2>&1 && echo " -r" ; } || echo " -E" )
+
 help:
-	@eval $$(sed -r -n 's/^([a-zA-Z0-9_-]+):.*?## (.*)$$/printf "%-20s %s\\n" "\1" "\2";/ ;	ta; b; :a p' $(MAKEFILE_LIST))
+	@eval $$($(SED) -n 's/^([a-zA-Z0-9_-]+):.*?## (.*)$$/printf "%-20s %s\\n" "\1" "\2";/ ;	ta; b; :a p' $(MAKEFILE_LIST))
 
 sinclude makefile.$(shell uname -n)
 
 .PHONY: check
 check:							## vérifier la présence des outils nécessaires
-	bin/check-tools
+	@bin/check-tools && echo OK
 
 .PHONY: push
 push:							## pousser les modifications vers les dépôts git
