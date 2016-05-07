@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Récupère une archive de RePEc en local.
 # 
 # usage: repec-mirror-archive [OPTIONS] ARC
@@ -29,21 +29,28 @@ ALL=${REPEC_ALL_URL:-ftp://all.repec.org/RePEc/all}
 WHAT="-A \*.rdf"
 INIT_ONLY=false
 
+if sed v </dev/null >/dev/null 2>&1 ; then # 'v' is specific to GNU sed
+  _sed() { sed -r "$@" ; }    # GNU
+else
+  _sed() { sed -E "$@" ; }    # (FreeBSD)
+fi
+
 doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
-log () { date "+%F %T $(basename $0) $*" | \
-               tee -a "$DEST/log/repec.log" "$DEST/log/$ARC.log" ; }
+
+log () { date "+%F %T ${0##*/} $*" | \
+           tee -a "$DEST/log/repec.log" "$DEST/log/$ARC.log" ; }
 
 while [ ! -z "$1" ] ;
 do
-    case "$1" in
-        "-h"|"--help") doc && exit ;;
-        "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
-        "-a"|"--all-url") shift ; ALL="$1" ;;
-        "-f"|"--full") WHAT= ;;
-        "-i"|"--init") INIT_ONLY=true ;;
-        *) break ;;
-    esac
-    shift
+  case "$1" in
+    "-h"|"--help") doc && exit ;;
+    "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
+    "-a"|"--all-url") shift ; ALL="$1" ;;
+    "-f"|"--full") WHAT= ;;
+    "-i"|"--init") INIT_ONLY=true ;;
+    *) break ;;
+  esac
+  shift
 done
 [ -z $1 ] && exit 1
 
@@ -56,41 +63,46 @@ cd "$DEST/remo"
 mkdir -p "$DEST/log"
 
 {
-    if [ "$ARC" = all ] ; then
-        echo all $ALL
-    else
-        grep -a '^URL:' "$DEST/remo/all/${ARC}arch.rdf" | \
-        sed -r \
-            -e "s!URL: *(.*)\$!$ARC \1!" \
-            -e 's!\r$!!' \
-            -e 's! *$!!' \
-            -e 's!/$!!'
-    fi
+  if [ "$ARC" = all ] ; then
+    echo all $ALL
+  else
+    grep -a '^URL:' "$DEST/remo/all/${ARC}arch.rdf" | \
+      _sed \
+          -e "s!URL: *(.*)\$!$ARC \1!" \
+          -e 's!\r$!!' \
+          -e 's! *$!!' \
+          -e 's!/$!!'
+  fi
 } |
 {
-    read arc url
+  read arc url
+  
+  $INIT_ONLY && test -d $arc && log $arc $url skipped && exit
+  
+  log $arc $url begin
+  clean () { cd "$DEST/remo" ; [ "$(ls -A $1)" ] || rmdir $1 ; }
+  trap 'log $arc $url stop ; trap - ERR' exit
+  trap 'log $arc $url error $e ; clean $arc' ERR
+  
+  mkdir -p $arc
+  cd $arc
+  
+  ndirs=$(sed -e 's!^[^:]*://[^/]*!!' -e 's![^/]!!g' <<< $url)
+  ndirs=${#ndirs}
+  
+  [ $arc = all ] && WHAT=
+  
+  wget $WHAT \
+       -t 2 --read-timeout=90 \
+       -m \
+       -np -nH --cut-dirs=$ndirs \
+       -o "$DEST/log/$ARC.log" "$url"
+  
+  trap - exit
+  log $arc $url end
+}
 
-    $INIT_ONLY && test -d $arc && log $arc $url skipped && exit
-    
-    log $arc $url begin
-    clean () { cd "$DEST/remo" ; [ "$(ls -A $1)" ] || rmdir $1 ; }
-    trap "log $arc $url stop ; trap - ERR" exit
-    trap "clean $arc ; log $arc $url error" ERR
-
-    mkdir -p $arc
-    cd $arc
-
-    ndirs=$(sed -e 's!^[^:]*://[^/]*!!' -e 's![^/]!!g' <<< $url)
-    ndirs=${#ndirs}
-
-    [ $arc = all ] && WHAT=
-
-    wget $WHAT \
-         -t 2 --read-timeout=90 \
-         -m \
-         -np -nH --cut-dirs=$ndirs \
-         -o "$DEST/log/$ARC.log" "$url"
-
-    trap - exit
-    log $arc $url end
-} 
+# Local Variables:
+# sh-indentation: 2
+# sh-basic-offset: 2
+# End:

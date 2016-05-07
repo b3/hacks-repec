@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Récupère toutes les archives de RePEc en local.
 # 
 # usage: repec-mirror [OPTIONS]
@@ -6,7 +6,7 @@
 # Les archives sont copiées dans RDIR/remo. Seul les fichiers RDF sont
 # téléchargés (sauf pour l'archive all qui est copiée intégralement). Les
 # archives récupérées sont celles aux codes de 3 lettres, définies dans
-# l'archive all.
+# l'archive all. Les archives sont récupérées par repec-mirror-archive.
 #
 # Le début et la fin du travail sont logués dans RDIR/log/repec.log, le
 # téléchargement de chaque archive dans RDIR/log/ARC.log (ARC étant le code de
@@ -30,26 +30,37 @@
 DEST=${REPEC_HOME:-/home/repec/RePEc}
 ALL=${REPEC_ALL_URL:-ftp://all.repec.org/RePEc/all}
 PATH="$(cd $(dirname $0) ; pwd):$PATH"
+STAMP="$(date '+%F-%H-%M-%S')"
 
 doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
-log () { date "+%F %T $(basename $0) $*" | tee -a "$DEST/log/repec.log" ; }
+
+log () { date "+%F %T ${0##*/} $*" | tee -a "$DEST/log/repec.log" ; }
 
 ARGS="$@"
 while [ ! -z "$1" ] ;
 do
-    case "$1" in
-        "-h"|"--help") doc && exit ;;
-        "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
-    esac
-    shift
+  case "$1" in
+    "-h"|"--help") doc && exit ;;
+    "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
+  esac
+  shift
 done
 
 mkdir -p "$DEST/log"
+
+log $STAMP begin
 
 [ ! -d "$DEST/remo/all" ] && repec-mirror-archive $ARGS all
 
 for arc in $(cd "$DEST/remo/all" ; ls -1 ???arch.rdf | cut -c1-3)
 do
-    [ $arc = ntu ] && continue
-    repec-mirror-archive $ARGS $arc
+  [ $arc = ntu ] && continue
+  repec-mirror-archive $ARGS $arc
 done
+
+log $STAMP end
+
+# Local Variables:
+# sh-indentation: 2
+# sh-basic-offset: 2
+# End:

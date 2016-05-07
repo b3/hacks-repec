@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Outils de manipulation de la base RePEc
 #
 # usage: repec [-h|--help] COMMANDE [ARGS...]
@@ -10,20 +10,28 @@
 BIN="$(cd $(dirname $0) ; pwd)"
 CMD="$(basename $0)"
 
-usage ()
+die () { echo "${0##*/}: error: $*" 1>&2 ; exit 1 ; }
+
+doc ()
 {
-    SUB=$(cd "$BIN" && ls "$CMD-"* 2>/dev/null | sed "s/^$CMD-//g")
-    sed -n '2,/^$/ { s/^ *#// ; s/^ //g ; t ok ; d ; :ok ; p }' <$0
-    [ -z "$SUB" ] || for s in $SUB
-    do
-        printf "\t$s\t\t$(sed -n '2 { s/^ *# // ; p }' $BIN/$CMD-$s)\n"
-    done
+  sed -n '2,/^$/ { s/^ *#// ; s/^ //g ; t ok ; d ; :ok ; p }' <$0
+
+  SUB=$(cd "$BIN" && ls "$CMD-"* 2>/dev/null | sed "s/^$CMD-//g")
+  [ -z "$SUB" ] || for s in $SUB
+  do
+    printf "  %-20s $(sed -n '2 { s/^ *# // ; p }' $BIN/$CMD-$s)\n" "$s"
+  done
 }
 
-[ "x$1" = "x-h" -o "x$1" = "x--help" ] && usage && exit
-[ $# -lt 1 ] && exit 1
+[ "x$1" = "x-h" -o "x$1" = "x--help" ] && doc && exit
+[ $# -lt 1 ] && die "bad syntax. Try --help."
 
 CMD="$CMD-$1"
 shift
-[ ! -x "$BIN/$CMD" ] && exit 1
+[ ! -x "$BIN/$CMD" ] && die "unknown command $CMD"
 exec "$BIN/$CMD" "$@"
+
+# Local Variables:
+# sh-indentation: 2
+# sh-basic-offset: 2
+# End:

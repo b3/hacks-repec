@@ -16,7 +16,7 @@
 #
 #     -h, --help           affiche ce message d'aide
 #     -t, --theme THEME    utilise THEME pour la forme du diaporama au lieu de
-#                          lille1. list permet de lister les thèmes. 
+#                          lille1. 'list' permet de lister les thèmes.
 #     -s, --slide-level N  spéficie le niveau de titre qui définit une diapo
 #                          au lieu du niveau 2
 #     -L, --latex          produit le source LaTeX plutôt que le résultat PDF
@@ -33,6 +33,17 @@
 # Convertir le fichier presentation.md qui inclut l'image image.pdf
 #
 #     md2beamer presentation.md image.pdf
+#
+# DEPENDANCES
+#
+# Pour fonctionner md2beamer a besoin que 'pandoc' ainsi qu'une installation
+# TeX (avec 'pdflatex' et la classe 'beamer.cls') soit accessible. Seul la
+# distribution TeXLive disponible pour Unix (sous le nom MacTeX pour Mac OS X)
+# a été testée.
+#
+# [pandoc]: http://pandoc.org
+# [texlive]: http://tug.org/texlive
+# [mactex]: http://tug.org/mactex
 #
 # DETAILS TECHNIQUES
 #
@@ -53,7 +64,6 @@
 # généralement c'est cat (quand le contenu est textuel et qu'il faut juste
 # l'extraire) ou base64 --decode (quand le contenu du fichier est binaire et
 # qu'on l'a embarqué en base64).
-#
 
 # FIXME: SOURCE et FICHIERS-INCLUS devraient pouvoir être un chemin quelconque (absolu par exemple)
 
@@ -66,11 +76,11 @@ else
 fi
 
 doc () { sed -n '2,/^$/ { s/^ *#// ; s/^ //g ; t ok ; d ; :ok ; p }' <$0 ; }
-err () { echo "$(basename $0): error: $*" 1>&2 ; exit 1 ; }
-log () { date "+%F %T $(basename $0) $*" | tee -a "$LOG" ; }
-abs () { echo $(cd $(dirname $1) ; pwd)/$(basename $1) ; }
+die () { echo "${0##*/}: error: $*" 1>&2 ; exit 1 ; }
+log () { date "+%F %T ${0##*/} $*" | tee -a "$LOG" ; }
+abs () { echo $(cd $(dirname $1) ; pwd)/${1##*/} ; }
 mute () { 1>/dev/null 2>&1 $* ; }
-need () { err "$1 is unavailable" ; }
+need () { die "$1 is unavailable" ; }
 
 # réussit si les outils nécessaires sont accessibles
 check ()
@@ -146,9 +156,9 @@ do
     shift
 done
 
-check || err "needed tools missing"
+check || die "needed tools missing"
 
-[ -z $1 ] && err "missing source file"
+[ -z $1 ] && die "missing source file"
 SRC=$(abs $1)
 dsttex=$(basename $1 .md).tex
 dstpdf=$(basename $1 .md).pdf
