@@ -143,7 +143,7 @@ do
         "-t"|"--theme")
             shift
             THEME=$1
-            ["$1" = "list" ] && list-themes && exit 0
+            [ "$1" = "list" ] && list-themes && exit 0
             ;;
         "-s"|"--slide-level")
             shift
