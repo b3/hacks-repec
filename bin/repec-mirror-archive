@@ -82,7 +82,7 @@ mkdir -p "$DEST/log"
   log $arc $url begin
   clean () { cd "$DEST/remo" ; [ "$(ls -A $1)" ] || rmdir $1 ; }
   trap 'log $arc $url stop ; trap - ERR' exit
-  trap 'log $arc $url error $e ; clean $arc' ERR
+  trap 'log $arc $url error $? ; clean $arc' ERR
   
   mkdir -p $arc
   cd $arc

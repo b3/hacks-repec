@@ -49,6 +49,7 @@ done
 mkdir -p "$DEST/log"
 
 log $STAMP begin
+trap 'log $STAMP stop' exit
 
 [ ! -d "$DEST/remo/all" ] && repec-mirror-archive $ARGS all
 
@@ -58,6 +59,7 @@ do
   repec-mirror-archive $ARGS $arc
 done
 
+trap - exit
 log $STAMP end
 
 # Local Variables:
