@@ -97,7 +97,7 @@ mkdir -p "$DEST/log"
        -m \
        -np -nH --cut-dirs=$ndirs \
 	   --unlink \
-       -o "$DEST/log/$ARC.log" "$url"
+       -a "$DEST/log/$ARC.log" "$url"
   
   trap - exit
   log $arc $url end
