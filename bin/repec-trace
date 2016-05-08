@@ -93,7 +93,7 @@ out "Dernières archives modifiées" \
     "ls -tl remo | head -n 6 | sed 1d"
 
 out "Dernières archives en erreur" \
-    "grep 'error$' log/repec.log | tail -n 20 | cut -d ' ' -f 4 | tr '\n' ' ' | sed 's/$/\n/'"
+    "grep 'error [0-9]$' log/repec.log | tail -n 20 | cut -d ' ' -f 4 | tr '\n' ' ' | sed 's/$/\n/'"
 
 shopt -s nullglob
 out "Derniers téléchargements" \
