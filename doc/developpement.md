@@ -16,3 +16,17 @@ Les logs des actions menées sont dans le répertoire `log`.
 Les copies locales des archives sont dans le répertoire `remo`, un répertoire par archive comme le spécifie la convention RePEc.
 
 Les copies datées des archives de RePEc sont dans des répertoires de `snapshots`. Chaque répertoire correspond à la date de la copie et contient une copie intégrale du répertoire `remo` et du répertoire `log`. Les copies sont créées via des liens physiques sauf pour les fichiers différents.
+
+## Création d'un mirroir
+
+Quelques notes en vrac pour ne pas oublier
+
+```shell
+STAMP=$(date '+%F')
+cd $HOME/RePEc
+mkdir snasphots/$STAMP
+cp -rl remo snasphots/$STAMP
+cp -rl log snasphots/$STAMP
+screen $HOME/bin/repec-mirror &
+watch -n 5 "$HOME/bin/repec-trace ; $HOME/bin/repec-trace -w > $HOME/www/index.html"
+```
