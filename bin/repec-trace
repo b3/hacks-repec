@@ -97,7 +97,7 @@ out "Dernières archives en erreur" \
 
 shopt -s nullglob
 out "Derniers téléchargements" \
-    "tail -n 10 $(ls -1t log/???.log | head -n 2)"
+    "tail -n 10 $(ls -1t log/???.log | head -n 2 | tr '\n' ' ')"
 
 out "Taille disque utilisée" \
     "du -shc *"
