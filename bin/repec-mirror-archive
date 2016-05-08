@@ -96,6 +96,7 @@ mkdir -p "$DEST/log"
        -t 2 --read-timeout=90 \
        -m \
        -np -nH --cut-dirs=$ndirs \
+	   --unlink \
        -o "$DEST/log/$ARC.log" "$url"
   
   trap - exit
