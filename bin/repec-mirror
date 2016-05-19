@@ -4,28 +4,37 @@
 # usage: repec-mirror [OPTIONS]
 #
 # Les archives sont copiées dans RDIR/remo. Seul les fichiers RDF sont
-# téléchargés (sauf pour l'archive all qui est copiée intégralement). Les
-# archives récupérées sont celles aux codes de 3 lettres, définies dans
-# l'archive all. Les archives sont récupérées par repec-mirror-archive.
+# téléchargés. 
 #
-# Le début et la fin du travail sont logués dans RDIR/log/repec.log, le
-# téléchargement de chaque archive dans RDIR/log/ARC.log (ARC étant le code de
-# chaque archive).
+# Le début et la fin du travail sont logués dans RDIR/log/repec.log.
+#
+# Sauf si l'option --quick est utilisée, la récupération des archives se fait
+# directement depuis tous les sites des membres participants à RePEc.
+#
+# Dans ce cas l'archive all est d'abord copiée intégralement. Les archives
+# récupérées sont alors celles aux codes de 3 lettres, définies dans l'archive
+# all. Chaque archive est récupérée par un appel à repec-mirror-archive.
+#
+# L'archive all est téléchargée, si nécessaire, depuis l'URL définie par la
+# valeur de la variable d'environnement REPEC_ALL_URL si elle existe ou
+# ftp://all.repec.org/RePEc/all sinon.
+#
+# Si l'option --quick est utilisée, les archives sont copiées uniquement à
+# partir d'un site offrant déjà un mirroir centralisant les données de
+# l'ensemble des archives. Les données sont alors récupérées par un appel à
+# repec-mirror-quick.
 #
 # RDIR est le répertoire contenant la base des données de RePEc. La valeur par
 # défaut pour RDIR est le contenu de la variable d'environnement REPEC_HOME si
 # elle existe ou /home/repec/RePEc sinon.
 #
-# L'archive all est téléchargée, si nécessaire, depuis l'URL définie par la
-# valeur de la variable d'environnement REPEC_ALL_URL si elle existe ou
-# ftp://all.repec.org/RePEc/all sinon.
-# 
 # OPTIONS possibles :
-#     -h, --help  affiche ce message
+#     -h, --help          affiche ce message
 #     -d, --dest DIR      fixe l'emplacement de la base RePEc
 #     -a, --all-url URL   fixe l'URL pour l'archive all
 #     -i, --init          copie uniquement les archives pas encore copiées
 #     -f, --full          copie tout, aka pas uniquement les fichiers RDF
+#         --quick         copie depuis un mirroir centralisant les archives
 
 DEST=${REPEC_HOME:-/home/repec/RePEc}
 ALL=${REPEC_ALL_URL:-ftp://all.repec.org/RePEc/all}
@@ -37,11 +46,13 @@ doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
 log () { date "+%F %T ${0##*/} $*" | tee -a "$DEST/log/repec.log" ; }
 
 ARGS="$@"
+quick=false
 while [ ! -z "$1" ] ;
 do
   case "$1" in
     "-h"|"--help") doc && exit ;;
     "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
+    "--quick") quick=true ;;
   esac
   shift
 done
@@ -51,13 +62,17 @@ mkdir -p "$DEST/log"
 log $STAMP begin
 trap 'log $STAMP stop' exit
 
-[ ! -d "$DEST/remo/all" ] && repec-mirror-archive $ARGS all
+if $quick ; then
+  repec-mirror-quick $ARGS
+else
+  [ ! -d "$DEST/remo/all" ] && repec-mirror-archive $ARGS all
 
-for arc in $(cd "$DEST/remo/all" ; ls -1 ???arch.rdf | cut -c1-3)
-do
-  [ $arc = ntu ] && continue # FIXME: boucle sur cette archive
-  repec-mirror-archive $ARGS $arc
-done
+  for arc in $(cd "$DEST/remo/all" ; ls -1 ???arch.rdf | cut -c1-3)
+  do
+    [ $arc = ntu ] && continue # FIXME: boucle sur cette archive
+    repec-mirror-archive $ARGS $arc
+  done
+fi
 
 trap - exit
 log $STAMP end
