@@ -49,6 +49,7 @@ done
 set -e
 umask 0002
 
+mkdir -p "$DEST/remo"
 cd "$DEST/remo"
 mkdir -p "$DEST/log"
 

@@ -59,7 +59,6 @@ umask 0002
 
 ARC="$1"
 
-cd "$DEST/remo"
 mkdir -p "$DEST/log"
 
 {
@@ -84,8 +83,8 @@ mkdir -p "$DEST/log"
   trap 'log $arc $url stop ; trap - ERR' exit
   trap 'log $arc $url error $? ; clean $arc' ERR
   
-  mkdir -p $arc
-  cd $arc
+  mkdir -p $DEST/remo/$arc
+  cd $DEST/remo/$arc
   
   ndirs=$(sed -e 's!^[^:]*://[^/]*!!' -e 's![^/]!!g' <<< $url)
   ndirs=${#ndirs}
