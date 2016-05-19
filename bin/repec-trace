@@ -27,7 +27,7 @@ out ()
     $HTML && printf "    <h2>$1</h2>\n<pre>\n"
     shift 
     if $HTML ; then
-        eval "$*" | sed -e 's/</&lt;/g' -e 's/>/&gt;/g'
+        eval "$*" | sed -e 's/</\&lt;/g' -e 's/>/\&gt;/g'
     else
         eval "$*"
     fi
