@@ -24,7 +24,7 @@
 
 SRC=${REPEC_MIRROR:-ftp://ftp.repec.org/opt/ReDIF/RePEc}
 DEST=${REPEC_HOME:-/home/repec/RePEc}
-WHAT="-A \*.rdf"
+WHAT='-A rdf'
 STAMP="$(date '+%F-%H-%M-%S')"
 
 die () { echo "${0##*/}: error: $*" 1>&2 ; exit 1 ; }
@@ -59,7 +59,7 @@ trap 'log $STAMP error $?' ERR
   
 ndirs=$(sed -e 's!^[^:]*://[^/]*!!' -e 's![^/]!!g' <<< $SRC)
 ndirs=${#ndirs}
-  
+
 wget $WHAT \
      -t 2 --read-timeout=90 \
      -m \
