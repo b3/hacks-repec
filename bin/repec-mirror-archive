@@ -13,9 +13,9 @@
 # défaut pour RDIR est le contenu de la variable d'environnement REPEC_HOME si
 # elle existe ou /home/repec/RePEc sinon.
 #
-# L'archive all est téléchargée depuis l'URL définie par la valeur de la
-# variable d'environnement REPEC_ALL_URL si elle existe ou
-# ftp://all.repec.org/RePEc/all sinon.
+# L'archive all est téléchargée en intégralité (pas uniquement les fichiers
+# RDF) depuis l'URL définie par la valeur de la variable d'environnement
+# REPEC_ALL_URL si elle existe ou ftp://all.repec.org/RePEc/all sinon.
 #
 # OPTIONS possibles :
 #     -h, --help          affiche ce message
@@ -96,7 +96,8 @@ mkdir -p "$DEST/log"
        -t 2 --read-timeout=90 \
        -m \
        -np -nH --cut-dirs=$ndirs \
-	   --unlink \
+       --unlink \
+       -e robots=off \
        -a "$DEST/log/$ARC.log" "$url"
   
   trap - exit
