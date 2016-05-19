@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# Récupère un mirroir complet de RePEc en local.
+# 
+# usage: repec-mirror-quick [OPTIONS]
+#
+# Le mirroir complet est copié dans RDIR/remo. Seul les fichiers RDF sont
+# téléchargés.
+#
+# Le début et la fin du travail sont logués dans RDIR/log/repec.log, le
+# téléchargement dans RDIR/log/mirror.log.
+#
+# Les données sont récupérées depuis l'URL définie par la valeur de la
+# variable d'environnement REPEC_MIRROR si elle existe ou
+# ftp://ftp.repec.org/opt/ReDIF/RePEc sinon.
+#
+# RDIR est le répertoire contenant la base des données de RePEc. La valeur par
+# défaut pour RDIR est le contenu de la variable d'environnement REPEC_HOME si
+# elle existe ou /home/repec/RePEc sinon.
+#
+# OPTIONS possibles :
+#     -h, --help          affiche ce message
+#     -d, --dest DIR      fixe l'emplacement de la base RePEc
+#     -f, --full          copie tout, aka pas uniquement les fichiers RDF
+
+SRC=${REPEC_MIRROR:-ftp://ftp.repec.org/opt/ReDIF/RePEc}
+DEST=${REPEC_HOME:-/home/repec/RePEc}
+WHAT="-A \*.rdf"
+STAMP="$(date '+%F-%H-%M-%S')"
+
+die () { echo "${0##*/}: error: $*" 1>&2 ; exit 1 ; }
+
+doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
+
+log () { date "+%F %T ${0##*/} $*" | \
+           tee -a "$DEST/log/repec.log" "$DEST/log/mirror.log" ; }
+
+while [ ! -z "$1" ] ;
+do
+  case "$1" in
+    "-h"|"--help") doc && exit ;;
+    "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
+    "-f"|"--full") WHAT= ;;
+    "--quick") ;;
+    *) die "unsupported option $1" ;;
+  esac
+  shift
+done
+[ -z $1 ] && exit 1
+
+set -e
+umask 0002
+
+cd "$DEST/remo"
+mkdir -p "$DEST/log"
+
+log $STAMP begin
+
+trap 'log $STAMP stop ; trap - ERR' exit
+trap 'log $STAMP error $?' ERR
+  
+ndirs=$(sed -e 's!^[^:]*://[^/]*!!' -e 's![^/]!!g' <<< $SRC)
+ndirs=${#ndirs}
+  
+wget $WHAT \
+     -t 2 --read-timeout=90 \
+     -m \
+     -np -nH --cut-dirs=$ndirs \
+     --unlink \
+     -e robots=off \
+     -a "$DEST/log/mirror.log" "$SRC"
+
+trap - exit
+log $STAMP end
+
+# Local Variables:
+# sh-indentation: 2
+# sh-basic-offset: 2
+# End:
