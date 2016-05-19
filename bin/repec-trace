@@ -26,7 +26,11 @@ out ()
     $HTML || printf "$1\n\n"
     $HTML && printf "    <h2>$1</h2>\n<pre>\n"
     shift 
-    eval "$*"
+    if $HTML ; then
+        eval "$*" | sed -e 's/</&lt;/g' -e 's/>/&gt;/g'
+    else
+        eval "$*"
+    fi
     $HTML || printf "\n\n"
     $HTML && printf "</pre>\n\n"
 }
@@ -97,7 +101,7 @@ out "Dernières archives en erreur" \
 
 shopt -s nullglob
 out "Derniers téléchargements" \
-    "tail -n 10 $(ls -1t log/???.log log/mirror.log | head -n 2 | tr '\n' ' ')"
+    "tail -n 10 $(ls -1t log/???.log log/mirror.log | head -n 1 | tr '\n' ' ')"
 
 out "Taille disque utilisée" \
     "du -shc *"
