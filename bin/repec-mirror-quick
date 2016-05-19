@@ -45,7 +45,6 @@ do
   esac
   shift
 done
-[ -z $1 ] && exit 1
 
 set -e
 umask 0002
