@@ -53,7 +53,7 @@ umask 0002
 cd "$DEST/remo"
 mkdir -p "$DEST/log"
 
-log $STAMP begin
+log $STAMP $SRC begin
 
 trap 'log $STAMP stop ; trap - ERR' exit
 trap 'log $STAMP error $?' ERR
