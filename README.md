@@ -19,9 +19,8 @@ Dans un premier temps on essaie :
 Pour cela il est nécessaire de comprendre et documenter le fonctionnement
 technique de cette base.
 
-L'état d'avancement de la tentative de récupération des notices
-bibliographiques de la base est accessible en ligne sur
-<http://dev.repec.fr>.
+L'état d'avancement des travaux (récupération des notices bibliographiques de
+la base, création du graphe de co-auteurs) est accessible en ligne sur **<http://dev.repec.fr>**.
 
 
 # Contenu
