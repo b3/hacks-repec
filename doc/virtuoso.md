@@ -38,7 +38,7 @@ Source : http://fr.dbpedia.org/wiki/D%C3%A9ploiement_de_Virtuoso#D.C3.A9marrage_
 
 ## Accès
 
-Dans l'outil [Conductor](http://test.boulgour.com:8890/conductor/), une fois identifié (via l'identifiant/mot de passe), nous pouvons accéder à l'interface iSQL (Interactive SQL) pour exécuter des commandes sur la base de données, à l'aide des commandes SQL prise en charge par Virtuoso.
+Dans l'outil [Conductor](http://dev.repec.fr:8890/conductor/), une fois identifié (via l'identifiant/mot de passe), nous pouvons accéder à l'interface iSQL (Interactive SQL) pour exécuter des commandes sur la base de données, à l'aide des commandes SQL prise en charge par Virtuoso.
 
 ISQL est accessible via l'onglet *Database*, puis *Interactive SQL*.
 
