@@ -78,7 +78,7 @@ $(sed -n '\!^# <CSS>!,\!^# </CSS>! { s/^/      / ; p }' $0 | sed '1d ; $d')
     <p>
       Une copie publique du dépôt git contenant les outils et informations
       utilisés pour télécharger les archives (<em>notices bibliographiques
-      uniquement</em>) de la base <a href='http://repec.org'>RePeC</a> est
+      uniquement</em>) de la base <a href='http://repec.org'>RePEC</a> est
       disponible sur <a
       href='https://github.com/b3/hacks-repec'>GitHub</a>.<br/>Elle est donc
       récupérable via <code>git clone
