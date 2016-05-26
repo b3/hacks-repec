@@ -41,9 +41,9 @@ usage: script [OPTIONS] ARGUMENTS...
 La doc complète doit venir ici. Toutes valeurs utilisées par défaut doivent y
 être spécifiées.
 
-OPTIONS possibles :
+OPTIONS :
     -h, --help   affiche ce message d'aide
 
 ~~~
 
-Ils doivent avoir un objectif simple (et unique) préciser sur la première ligne du manuel. Il vaut mieux plusieurs petits programmes combinables qu'un seul gros.
+Ils doivent avoir un objectif simple (et unique) précisé sur la première ligne du manuel. Il vaut mieux plusieurs petits programmes combinables qu'un seul gros.
