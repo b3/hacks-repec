@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # Vérifie que tous les outils nécessaires sont disponibles.
 #
 # usage: check-tools [OPTIONS]
