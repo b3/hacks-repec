@@ -1,6 +1,7 @@
 Notes concernant les données RePEc
 ==================================
 
+*Remarque: Une bonne partie des informations ci-dessus sont issues de [cette page](https://ideas.repec.org/getdata.html) sur le site IDEAS.*
 
 Concernant les données auteurs
 ------------------------------
@@ -23,7 +24,7 @@ Le service *RePEc Author Service*
 - Les détails de contact sont historisés et peuvent être retracés.
 - Ce service donne lieu à la création d'un profil public qui liste tous les travaux de recherche (à la manière de ce que propose Google Scholar). Le profil en question est ensuite visible depuis le site [IDEAS](https://ideas.repec.org/i/e.html).
 - Le profil d'un auteur peut être rattaché à tout travail dont il prétend être l'auteur.
-- Un identifiant unique est créé pour chaque auteur (RePEc Short-ID).
+- Un identifiant unique est créé pour chaque auteur (RePEc `Short-ID`).
 - Cela permet de distinguer les travaux d'homonymes.
 - L'auteur a accès à des données statistiques concernant ses travaux et les citations associés.
 - Les données collectées sont utilisées pour des travaux en économie et en finance, incluant les auteurs et les institutions auxquels ils sont affiliés.
@@ -42,7 +43,7 @@ Accès aux données RePEc via les dépôts
 
 La [synthese-repec](synthese-repec.md) contient une section difinissant l'accès aux métadonnées RePEc.
 
-Les données relatives aux auteurs sont accessibles via l'archive `RePEc:per`. Il s'agit d'un répertoire qui se situe au même niveau que les autres dans les dépôts RePEc. Dans notre cas, la copie est disponible à cette adresse : http://test.boulgour.com/repec/remo/per/. A noter qu'il existe un [script Perl](ftp://repec.oru.se/RePEc/cpd/conf/migrate.cfg) qui met à jour les handles suite à la migration de certains identifiants de différentes institutions.
+Les données relatives aux auteurs sont accessibles via l'archive `RePEc:per`. Il s'agit d'un répertoire qui se situe au même niveau que les autres dans les dépôts RePEc. Dans notre cas, la copie est disponible à cette adresse : http://dev.repec.fr/remo/per/. A noter qu'il existe un [script Perl](ftp://repec.oru.se/RePEc/cpd/conf/migrate.cfg) qui met à jour les handles suite à la migration de certains identifiants de différentes institutions.
 
 
 Les formats de données
@@ -68,28 +69,26 @@ La liste de tous les templates est disponible à cette adresse : https://ideas.r
 
 ### Qu'est-ce qu'un working paper (WP) ?
 
-Particulièrement important en sciences économiques, le working paper est un document qui fournit les résultats détaillés d'une recherche. Dans le monde académique, il est considéré comme une prepublication, ou preprint, c'est-à-dire un projet d'article en attente de parution dans une revue scientifique. Le réseau RePEc est l'acteur majeur de la diffusion de la littérature grise en économie, et notamment des working papers. [Source: [site de l'Université de Rennes 1](http://focus.univ-rennes1.fr/content.php?pid=467792&sid=5722677)]
+Particulièrement important en sciences économiques, le working paper est un document qui fournit les résultats détaillés d'une recherche. Dans le monde académique, il est considéré comme une *prepublication*, ou *preprint*, c'est-à-dire un projet d'article en attente de parution dans une revue scientifique. Le réseau RePEc est l'acteur majeur de la diffusion de la littérature grise en économie et notamment des working papers. [Source: [site de l'Université de Rennes 1](http://focus.univ-rennes1.fr/content.php?pid=467792&sid=5722677)]
 
-Econpapers met à disposition sur son site un outil pour vérifier la bonne syntaxe des documents créés par les utilisateurs. Des emails sont envoyés tous les mois aux auteurs pour leur signalité des problèmes si des erreurs sont identifiées dans les documents qui ont été soumis.
+[Econpapers](http://econpapers.repec.org) met à disposition sur son site un outil pour vérifier la bonne syntaxe des documents créés par les utilisateurs. Des emails sont envoyés tous les mois aux auteurs pour leur signaler des problèmes si des erreurs sont identifiées dans les documents qui ont été soumis.
 
 
 Identifant unique pour les auteurs
 ----------------------------------
 
-Chaque auteur se voit attribué un identifiant (Short-ID) qui est composé de trois lettres et d'un identifiant numérique :
+Chaque auteur se voit attribué un identifiant (`Short-ID`) qui est composé de trois lettres et d'un identifiant numérique :
 
 - 1er caractère : p (pour *person*)
 - 2ème et 3èmes caractères : deux premières lettres du nom de famille de l'auteur
 - caractères suivants : valeur numérique (auto-incrémentée ?)
 
-Exemple : https://ideas.repec.org/e/pyu16.html 
+Exemple : https://ideas.repec.org/e/pfa122.html 
 
-Le site RePEc propose un service [Author Short-ID Lookup](https://ideas.repec.org/cgi-bin/shortid.cgi) qui permet de retrouver les publications d'un auteur. Si l'on interroge l'outil avec le nom d'un auteur, l'application nous renvoie la liste des auteurs avec ce nom, accompagné du Short-ID associé.
+RePEc propose un service, [Author Short-ID Lookup](https://ideas.repec.org/cgi-bin/shortid.cgi), qui permet de retrouver les publications d'un auteur. Si l'on interroge l'outil avec le nom d'un auteur, l'application nous renvoie la liste des auteurs avec ce nom, accompagné du `Short-ID` associé.
 
 
 Encodage des données
 --------------------
 
 RePEc supporte les standards [Unicode](https://fr.wikipedia.org/wiki/Unicode) UTF-8 et, depuis peu, UTF-16. Par conséquent, les fichiers au format ASCII, ISO-LATIN-1 et Windows-1252 sont pris en charge. Néanmoins, cela n'exclut en rien des problèmes d'encodage.
-
-*Remarque: Une bonne partie des informations ci-dessus sont issues de [cette page](https://ideas.repec.org/getdata.html) sur le site IDEAS.*
