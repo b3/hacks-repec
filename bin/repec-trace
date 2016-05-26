@@ -23,35 +23,35 @@ doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
 
 out ()
 {
-    $HTML || printf "$1\n\n"
-    $HTML && printf "    <h2>$1</h2>\n<pre>\n"
-    shift 
-    if $HTML ; then
-        eval "$*" | sed -e 's/</\&lt;/g' -e 's/>/\&gt;/g'
-    else
-        eval "$*"
-    fi
-    $HTML || printf "\n\n"
-    $HTML && printf "</pre>\n\n"
+  $HTML || printf "$1\n\n"
+  $HTML && printf "    <h2>$1</h2>\n<pre>\n"
+  shift 
+  if $HTML ; then
+    eval "$*" | sed -e 's/</\&lt;/g' -e 's/>/\&gt;/g'
+  else
+    eval "$*"
+  fi
+  $HTML || printf "\n\n"
+  $HTML && printf "</pre>\n\n"
 }
 
 while [ ! -z "$1" ] ;
 do
-    case "$1" in
-        "-h"|"--help") doc && exit ;;
-        "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
-        "-w"|"--webpage") HTML=true ;;
-        *) break;
-    esac
-    shift
+  case "$1" in
+    "-h"|"--help") doc && exit ;;
+    "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
+    "-w"|"--webpage") HTML=true ;;
+    *) break;
+  esac
+  shift
 done
 
 $HTML && {
-    titre="Trace RePEc du $(date '+%F à %T')"
-    nom="$(git config --get user.name)"
-    email="$(git config --get user.email)"
-    
-    cat <<EOF
+  titre="Trace RePEc du $(date '+%F à %T')"
+  nom="$(git config --get user.name)"
+  email="$(git config --get user.email)"
+  
+  cat <<EOF
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -176,3 +176,8 @@ h3{
   color: #666;
 }
 # </CSS>
+
+# Local Variables:
+# sh-indentation: 2
+# sh-basic-offset: 2
+# End:
