@@ -6,11 +6,11 @@ Ce sont des notices de type `Template-Type: ReDIF-Paper 1.0`. Reste à voir si l
 
 ## Est-ce que cette l'information de classification d'une publication est présente de manière **fiable** dans la base ?
 
-Dans les fichiers ReDif, la classification de la publication n'est pas obligatoire. Donc elle ne peut pas être présente de manière fiable.
+Dans les fichiers ReDIF, la classification de la publication n'est pas obligatoire. Donc elle ne peut pas être présente de manière fiable.
 
 ## Quel est le taux de publications sans information de classification accessible directement dans la base ?
 
-J'ai trouvé un script Perl installable facilement sur un serveur qui permet de parcourir les champs de fichiers ReDif : https://ideas.repec.org/c/rpc/script/paperscript.html. Ca peut être un moyen d'obtenir le taux des publications sans classification. 
+J'ai trouvé un script Perl installable facilement sur un serveur qui permet de parcourir les champs de fichiers ReDIF : https://ideas.repec.org/c/rpc/script/paperscript.html. Ca peut être un moyen d'obtenir le taux des publications sans classification. 
 
 # Questions fermées
 
