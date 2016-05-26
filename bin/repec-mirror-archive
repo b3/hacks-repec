@@ -40,6 +40,10 @@ doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
 log () { date "+%F %T ${0##*/} $*" | \
            tee -a "$DEST/log/repec.log" "$DEST/log/$ARC.log" ; }
 
+die () { echo "${0##*/}: error: $*" 1>&2 ; exit 1 ; }
+
+mute () { 1>/dev/null 2>&1 $* ; }
+
 while [ ! -z "$1" ] ;
 do
   case "$1" in
@@ -52,7 +56,9 @@ do
   esac
   shift
 done
-[ -z $1 ] && exit 1
+[ -z $1 ] && die "no archive specified. Try --help."
+
+mute which wget || die "wget is unavaiblable"
 
 set -e
 umask 0002

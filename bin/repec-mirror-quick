@@ -34,6 +34,8 @@ doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
 log () { date "+%F %T ${0##*/} $*" | \
            tee -a "$DEST/log/repec.log" "$DEST/log/mirror.log" ; }
 
+mute () { 1>/dev/null 2>&1 $* ; }
+
 while [ ! -z "$1" ] ;
 do
   case "$1" in
@@ -45,6 +47,8 @@ do
   esac
   shift
 done
+
+mute which wget || die "wget is unavailable"
 
 set -e
 umask 0002
