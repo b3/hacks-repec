@@ -26,7 +26,7 @@
 
 DEST=${REPEC_HOME:-/home/repec/RePEc}
 ALL=${REPEC_ALL_URL:-ftp://all.repec.org/RePEc/all}
-WHAT='-A rdf'
+WHAT='-A rdf,redif'
 INIT_ONLY=false
 
 if sed v </dev/null >/dev/null 2>&1 ; then # 'v' is specific to GNU sed

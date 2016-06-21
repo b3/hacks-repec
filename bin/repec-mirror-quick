@@ -24,7 +24,7 @@
 
 SRC=${REPEC_MIRROR:-ftp://ftp.repec.org/opt/ReDIF/RePEc}
 DEST=${REPEC_HOME:-/home/repec/RePEc}
-WHAT='-A rdf'
+WHAT='-A rdf,redif'
 STAMP="$(date '+%F-%H-%M-%S')"
 
 die () { echo "${0##*/}: error: $*" 1>&2 ; exit 1 ; }
