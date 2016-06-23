@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+# Crée un instantanné des archives locales de RePEc
+# 
+# usage: repec-snapshot [OPTIONS]
+#
+# Le snapshot est crée dans RDIR/snapshots/YYYY-MM-DD. YYYY-MM-DD correspond à
+# la date courante. Il contient une "copie" de RDIR/remo et une "copie" de
+# RDIR/log. Les copies sont créées via des liens physiques sauf pour les
+# fichiers différents.
+#
+# Le début et la fin du travail sont logués dans RDIR/log/repec.log.
+#
+# RDIR est le répertoire contenant la base des données de RePEc. La valeur par
+# défaut pour RDIR est le contenu de la variable d'environnement REPEC_HOME si
+# elle existe ou /home/repec/RePEc sinon.
+#
+# OPTIONS possibles :
+#     -h, --help         affiche ce message
+#     -d, --dest DIR     fixe l'emplacement de la base RePEc
+#     -l, --label LABEL  marque avec LABEL plutôt qu'avec la date courante
+
+DEST=${REPEC_HOME:-/home/repec/RePEc}
+PATH="$(cd $(dirname $0) ; pwd):$PATH"
+STAMP="$(date '+%F')"
+
+doc () { sed -n '2,/^$/ {s/^ *#// ; s/^ //g ; p }' <$0 ; }
+
+log () { date "+%F %T ${0##*/} $*" | tee -a "$DEST/log/repec.log" ; }
+
+ARGS="$@"
+while [ ! -z "$1" ] ;
+do
+  case "$1" in
+    "-h"|"--help") doc && exit ;;
+    "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
+    "-l"|"--label") shift ; LABEL="$1" ;;
+  esac
+  shift
+done
+
+set -e
+
+mkdir -p "$DEST/log"
+
+log $STAMP begin
+trap 'log $STAMP stop' exit
+
+mkdir -p "$DEST/snapshots/$LABEL"
+cp -rl "$DEST/remo" "$DEST/snapshots/$LABEL"
+cp -rl "$DEST/log" "$DEST/snapshots/$LABEL"
+
+trap - exit
+log $STAMP end
+
+# Local Variables:
+# sh-indentation: 2
+# sh-basic-offset: 2
+# End:
