@@ -15,7 +15,9 @@ Les logs des actions menées sont dans le répertoire `log`.
 
 Les copies locales des archives sont dans le répertoire `remo`, un répertoire par archive comme le spécifie la convention RePEc.
 
-Les copies datées des archives de RePEc sont dans des répertoires de `snapshots`. Chaque répertoire correspond à la date de la copie et contient une copie intégrale du répertoire `remo` et du répertoire `log`. Les copies sont créées via des liens physiques sauf pour les fichiers différents.
+Les copies datées des archives de RePEc sont dans des répertoires de `snapshots`. Chacun des répertoires de `snapshots` correspond à la date de la copie et contient une copie intégrale du répertoire `remo` et du répertoire `log`. Les copies sont créées via des liens physiques sauf pour les fichiers différents.
+
+`remo` est un lien symbolique vers le répertoire de `snapshots` qui correspond à la date de sa mise à jour.
 
 ## Création d'un mirroir
 
