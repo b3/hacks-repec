@@ -5,8 +5,9 @@
 #
 # Le snapshot est crée dans RDIR/snapshots/YYYY-MM-DD. YYYY-MM-DD correspond à
 # la date courante. Il contient une "copie" de RDIR/remo et une "copie" de
-# RDIR/log. Les copies sont créées via des liens physiques sauf pour les
-# fichiers différents.
+# RDIR/log. Les copies sont créées via des liens physiques, de façon à ce que
+# lorsque l'on modifie ultérieurement un fichier dans RDIR/remo la version
+# initiale est conservée dans l'instantanné.
 #
 # Le début et la fin du travail sont logués dans RDIR/log/repec.log.
 #
