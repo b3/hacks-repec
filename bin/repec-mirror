@@ -3,8 +3,8 @@
 # 
 # usage: repec-mirror [OPTIONS]
 #
-# Les archives sont copiées dans RDIR/remo. Seul les fichiers RDF sont
-# téléchargés. 
+# Les archives sont copiées dans RDIR/remo. Seul les fichiers ReDIF sont
+# téléchargés.
 #
 # Le début et la fin du travail sont logués dans RDIR/log/repec.log.
 #
@@ -56,6 +56,8 @@ do
   esac
   shift
 done
+
+set -e
 
 mkdir -p "$DEST/log"
 

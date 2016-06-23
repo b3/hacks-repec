@@ -3,7 +3,7 @@
 # 
 # usage: repec-mirror-quick [OPTIONS]
 #
-# Le mirroir complet est copié dans RDIR/remo. Seul les fichiers RDF sont
+# Le mirroir complet est copié dans RDIR/remo. Seul les fichiers ReDIF sont
 # téléchargés.
 #
 # Le début et la fin du travail sont logués dans RDIR/log/repec.log, le

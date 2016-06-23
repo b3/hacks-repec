@@ -3,7 +3,7 @@
 # 
 # usage: repec-mirror-archive [OPTIONS] ARC
 #
-# L'archive est copiée dans RDIR/remo/ARC. Seul les fichiers RDF sont
+# L'archive est copiée dans RDIR/remo/ARC. Seul les fichiers ReDIF sont
 # téléchargés.
 #
 # Le début et la fin du travail sont logués dans RDIR/log/repec.log, le

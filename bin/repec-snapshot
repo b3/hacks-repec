@@ -40,6 +40,7 @@ do
 done
 
 set -e
+umask 0002
 
 mkdir -p "$DEST/log"
 
