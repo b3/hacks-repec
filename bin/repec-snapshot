@@ -17,7 +17,7 @@
 # OPTIONS possibles :
 #     -h, --help         affiche ce message
 #     -d, --dest DIR     fixe l'emplacement de la base RePEc
-#     -l, --label LABEL  marque avec LABEL plutôt qu'avec la date courante
+#     -s, --stamp STAMP  marque avec STAMP plutôt qu'avec la date courante
 
 DEST=${REPEC_HOME:-/home/repec/RePEc}
 PATH="$(cd $(dirname $0) ; pwd):$PATH"
@@ -33,7 +33,7 @@ do
   case "$1" in
     "-h"|"--help") doc && exit ;;
     "-d"|"--dest") shift ; DEST="$(cd $1 && pwd)" ;;
-    "-l"|"--label") shift ; LABEL="$1" ;;
+    "-s"|"--stamp") shift ; STAMP="$1" ;;
   esac
   shift
 done
@@ -45,9 +45,9 @@ mkdir -p "$DEST/log"
 log $STAMP begin
 trap 'log $STAMP stop' exit
 
-mkdir -p "$DEST/snapshots/$LABEL"
-cp -rl "$DEST/remo" "$DEST/snapshots/$LABEL"
-cp -rl "$DEST/log" "$DEST/snapshots/$LABEL"
+mkdir -p "$DEST/snapshots/$STAMP"
+cp -rl "$DEST/remo" "$DEST/snapshots/$STAMP"
+cp -rl "$DEST/log" "$DEST/snapshots/$STAMP"
 
 trap - exit
 log $STAMP end
