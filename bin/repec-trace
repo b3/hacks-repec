@@ -62,7 +62,7 @@ $HTML && {
 $(sed -n '\!^# <CSS>!,\!^# </CSS>! { s/^/      / ; p }' $0 | sed '1d ; $d')
     </style>
     <script>
-      window.setTimeout(function(){ location.reload() }, 10000);
+      window.setTimeout(function(){ location.reload() }, 60000);
     </script>
     <title>$titre</title>
   </head>
@@ -72,7 +72,7 @@ $(sed -n '\!^# <CSS>!,\!^# </CSS>! { s/^/      / ; p }' $0 | sed '1d ; $d')
 
     <p>
       Les archives téléchargées sont accessibles dans <code><a href='remo'>remo</a></code>.
-      La page se recharge automatiquement toutes les 10 secondes.
+      La page se recharge automatiquement toutes les minutes.
     </p>
 
     <p>
